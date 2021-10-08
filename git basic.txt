@@ -1,0 +1,14 @@
+git add .
+git commit -m "blablabla"
+git push
+
+_____
+origin/master - problem
+
+1. git fetch 
+2. git merge
+3. git pull
+4. git status
+_____________
+
+pg. 98 - cap 4
