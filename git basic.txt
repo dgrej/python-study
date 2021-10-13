@@ -11,4 +11,3 @@ origin/master - problem
 4. git status
 _____________
 
-pg. 98 - cap 4
