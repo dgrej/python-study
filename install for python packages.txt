@@ -10,4 +10,15 @@ python3.4 -m pip install SomePackage  # specifically Python 3.4
 
 
 -------
-jupiter notebook
+#Pyenv install
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+echo -e 'export PATH="~/.pyenv/bin:$PATH"' >> ~/.bashrc
+echo -e 'eval "$(pyenv init --path)"\n' >> ~/.bashrc
+echo -e 'eval "$(pyenv virtualenv-init -)"\n' >> ~/.bashrc
+
+comandos:
+pyenv install --list
+pip install package-name
+pyenv install -l (lista todos os programas)
+pyenv install 3.10.0 (instalar o python)
+pyenv global 3.9.7 (declara essa versão como padrão)
