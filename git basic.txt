@@ -12,3 +12,7 @@ origin/master - problem
 _____________
 
 git submodule add https://github /isso clona o link e add como submodule
+git submodule init /inicia o submodule
+git submodule update / carrega as info necessarias
+
+_____________
