@@ -11,3 +11,4 @@ origin/master - problem
 4. git status
 _____________
 
+git submodule add https://github /isso clona o link e add como submodule
