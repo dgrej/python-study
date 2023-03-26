@@ -2,6 +2,9 @@ pip install numpy (for python 3.9) - python default
 
 py -m pip install numpy (for python3.10) - default for py
 
+py -m pip install --upgrade pip
+
+
 or...
 python2   -m pip install SomePackage  # default Python 2
 python2.7 -m pip install SomePackage  # specifically Python 2.7
