@@ -1,14 +1,18 @@
+﻿#SCRIPT IN PYTHON BY DINO GREJO - DINOGREJO@GMAIL.COM GITHUB: DGREJ
+
 import os
 import re
 
 # pasta contendo os arquivos XML
-caminho_pasta = r'C:\Users\dinog\Downloads\Fatura número 1704 - TORNADO LOG'
+caminho_pasta = r'C:\Users\dino.grejo\OneDrive - VIVEO\Documentos\python\xml'
 
 # regex para extrair os números da tag chave
-regex = r'<chave>(\d+)</chave>'
+regex = r'<chCTe>(\d+)</chCTe>'
 
 # abrindo o arquivo de texto para escrita
 with open('chave.txt', 'w') as arquivo_chave:
+    # ESCREVENDO CHAVE NO CABEÇALHO DO TXT
+    arquivo_chave.write('CHAVE\n')
     # iterando sobre cada arquivo na pasta
     for nome_arquivo in os.listdir(caminho_pasta):
         if nome_arquivo.endswith('.xml'):

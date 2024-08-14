@@ -1,3 +1,5 @@
+#SCRIPT IN PYTHON BY DINO GREJO - DINOGREJO@GMAIL.COM GITHUB: DGREJ
+
 import os
 import xml.etree.ElementTree as ET
 import pandas as pd
