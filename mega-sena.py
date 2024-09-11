@@ -1,9 +1,9 @@
 import random
-print("Apostas da Mega Sena, cada jogo custa R$ 4,50")
+print("Apostas da Mega Sena, cada jogo custa R$ 5,00")
 
 quantidade_matrizes = int(input("Digite a quantidade de jogos que você deseja gerar: "))
 
-apostas = 4.50
+apostas = 5.00
 total_apostas = quantidade_matrizes*apostas 
 
 for i in range(quantidade_matrizes):
