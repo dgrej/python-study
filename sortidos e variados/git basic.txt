@@ -1,0 +1,21 @@
+git add .
+git commit -m "blablabla"
+git push
+
+_____
+origin/master - problem
+
+1. git fetch 
+2. git merge
+3. git pull
+4. git status
+_____________
+
+git submodule add https://github /isso clona o link e add como submodule
+git submodule init /inicia o submodule
+git submodule update / carrega as info necessarias
+
+_____________
+
+
+criar chave SSH: https://docs.github.com/pt/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
