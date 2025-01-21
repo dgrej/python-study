@@ -1,0 +1,1 @@
+./Users/dino.grejo/Documents/Py/venv/Scripts/activate
