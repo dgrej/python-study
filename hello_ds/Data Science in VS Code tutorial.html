@@ -1,0 +1,2756 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)https://code.visualstudio.com/docs/datascience/data-science-tutorial#_prepare-the-data -->
+<html lang="en" data-theme="light" style="--docs-sticky-top: 108.33330000000001px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="awa-expId" content="vscw_aaflight1016_treatment:103440;">
+	<meta name="awa-env" content="prod">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="hNs7DXrTySP_X-0P_AC0WulAXvUwgSXEmgfcO2r79dw">
+
+	<!-- Twitter and Facebook OpenGraph Metadata-->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@code">
+
+	<meta name="description" content="Python data science tutorial demonstrating the use of common data science and machine learning libraries with Visual Studio code Jupyter Notebook support.">
+<meta name="keywords" content="">
+<meta name="ms.prod" content="vs-code">
+<meta name="ms.TOCTitle" content="">
+<meta name="ms.ContentId" content="3c7ae641-e45c-4892-9d8c-7f22bdc549dd">
+<meta name="ms.date" content="1/9/2023">
+<meta name="ms.topic" content="conceptual">
+<!-- Twitter and Facebook OpenGraph Metadata-->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://code.visualstudio.com/docs/datascience/data-science-tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Science in VS Code tutorial">
+<meta property="og:description" content="Python data science tutorial demonstrating the use of common data science and machine learning libraries with Visual Studio code Jupyter Notebook support.">
+
+<meta property="og:image" content="https://code.visualstudio.com/assets/docs/datascience/tutorial/python-social.png">
+
+
+
+	<link rel="shortcut icon" href="https://code.visualstudio.com/assets/favicon.ico" sizes="128x128">
+	<link rel="apple-touch-icon" href="https://code.visualstudio.com/assets/apple-touch-icon.png">
+
+	<title>Data Science in VS Code tutorial</title>
+
+	<link rel="stylesheet" href="./Data Science in VS Code tutorial_files/style.css">
+
+	<script src="./Data Science in VS Code tutorial_files/wcp-consent.js.download"></script>
+	<script type="text/javascript" src="./Data Science in VS Code tutorial_files/ms.analytics-web-4.min.js.download"></script>
+	
+	<script type="text/javascript">
+	// Leave as var; siteConsent is initialized and referenced elsewhere.
+	var siteConsent = null;
+	
+	const GPC_DataSharingOptIn = false;
+	WcpConsent.onInitCallback(function () {
+		window.appInsights = new oneDS.ApplicationInsights();
+		window.appInsights.initialize({
+			instrumentationKey: "1a3eb3104447440391ad5f2a6ee06a0a-62879566-bc58-4741-9650-302bf2af703f-7103",
+			propertyConfiguration: {
+				userConsented: false,
+				gpcDataSharingOptIn: false,
+				callback: {
+					userConsentDetails: siteConsent ? siteConsent.getConsent : undefined
+				},
+			},
+			cookieCfg: {
+				ignoreCookies: ["MSCC"]
+			},
+			webAnalyticsConfiguration:{ // Web Analytics Plugin configuration
+				urlCollectQuery: true,
+				urlCollectHash: true,
+				autoCapture: {
+					scroll: true,
+					pageView: true,
+					onLoad: true,
+					onUnload: true,
+					click: true,
+					resize: true,
+					jsError: true
+				}
+			}
+		}, []);
+	
+		window.appInsights.getPropertyManager().getPropertiesContext().web.gpcDataSharingOptIn = GPC_DataSharingOptIn;
+	});
+	</script>
+	<link rel="alternate" type="application/atom+xml" title="RSS Feed for code.visualstudio.com" href="https://code.visualstudio.com/feed.xml">
+<style id="ms-consent-banner-main-styles">.w8hcgFksdo30C8w-bygqu{color:#000}.ydkKdaztSS0AeHWIeIHsQ a{color:#0067B8}.erL690_8JwUW-R4bJRcfl{background-color:#EBEBEB;border:none;color:#000}.erL690_8JwUW-R4bJRcfl:enabled:hover{color:#000;background-color:#DBDBDB;box-shadow:0px 4px 10px rgba(0,0,0,0.25);border:none}.erL690_8JwUW-R4bJRcfl:enabled:focus{background-color:#DBDBDB;box-shadow:0px 4px 10px rgba(0,0,0,0.25);border:2px solid #000}.erL690_8JwUW-R4bJRcfl:disabled{opacity:1;color:rgba(0,0,0,0.2);background-color:rgba(0,0,0,0.2);border:none}._1zNQOqxpBFSokeCLGi_hGr{border:none;background-color:#0067B8;color:#fff}._1zNQOqxpBFSokeCLGi_hGr:enabled:hover{color:#fff;background-color:#0067B8;box-shadow:0px 4px 10px rgba(0,0,0,0.25);border:none}._1zNQOqxpBFSokeCLGi_hGr:enabled:focus{background-color:#0067B8;box-shadow:0px 4px 10px rgba(0,0,0,0.25);border:2px solid #000}._1zNQOqxpBFSokeCLGi_hGr:disabled{opacity:1;color:rgba(0,0,0,0.2);background-color:rgba(0,120,215,0.2);border:none}._23tra1HsiiP6cT-Cka-ycB{position:relative;display:flex;z-index:9999;width:100%;background-color:#F2F2F2;justify-content:space-between;text-align:left}div[dir="rtl"]._23tra1HsiiP6cT-Cka-ycB{text-align:right}._1Upc2NjY8AlDn177YoVj0y{margin:0;padding-left:5%;padding-top:8px;padding-bottom:8px}div[dir="rtl"] ._1Upc2NjY8AlDn177YoVj0y{margin:0;padding:8px 5% 8px 0;float:none}._23tra1HsiiP6cT-Cka-ycB svg{fill:none;max-width:none;max-height:none}._1V_hlU-7jdtPiooHMu89BB{display:table-cell;padding:12px;width:24px;height:24px;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:24px;line-height:0}.f6QKJD7fhSbnJLarTL-W-{display:table-cell;vertical-align:middle;padding:0;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:13px;line-height:16px}.f6QKJD7fhSbnJLarTL-W- a{text-decoration:underline}._2j0fmugLb1FgYz6KPuB91w{display:inline-block;margin-left:5%;margin-right:5%;min-width:40%;min-width:calc((150px + 3 * 4px) * 2 + 150px);min-width:-webkit-fit-content;min-width:-moz-fit-content;min-width:fit-content;align-self:center;position:relative}._1XuCi2WhiqeWRUVp3pnFG3{margin:4px;padding:5px;min-width:150px;min-height:36px;vertical-align:top;cursor:pointer;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px;text-align:center}._1XuCi2WhiqeWRUVp3pnFG3:focus{box-sizing:border-box}._1XuCi2WhiqeWRUVp3pnFG3:disabled{cursor:not-allowed}._2bvsb3ubApyZ0UGoQA9O9T{display:block;position:fixed;z-index:10000;top:0;left:0;width:100%;height:100%;background-color:rgba(255,255,255,0.6);overflow:auto;text-align:left}div[dir="rtl"]._2bvsb3ubApyZ0UGoQA9O9T{text-align:right}div[dir="rtl"] ._2bvsb3ubApyZ0UGoQA9O9T{left:auto;right:0}.AFsJE948muYyzCMktdzuk{position:relative;top:8%;margin-bottom:40px;margin-left:auto;margin-right:auto;box-sizing:border-box;width:640px;background-color:#fff;border:1px solid #0067B8}._3kWyBRbW_dgnMiEyx06Fu4{float:right;z-index:1;margin:2px;padding:12px;border:none;cursor:pointer;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:13px;line-height:13px;display:flex;align-items:center;text-align:center;color:#666;background-color:#fff}div[dir="rtl"] ._3kWyBRbW_dgnMiEyx06Fu4{margin:2px;padding:12px;float:left}.uCYvKvHXrhjNgflv1VqdD{position:static;margin-top:36px;margin-left:36px;margin-right:36px}._17pX1m9O_W--iZbDt3Ta5r{margin-top:0;margin-bottom:12px;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:600;font-size:20px;line-height:24px;text-transform:none}._1kBkHQ1V1wu3kl-YcLgUr6{height:446px;overflow:auto}._20_nXDf6uFs9Q6wxRXG-I-{margin-top:0;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px}._20_nXDf6uFs9Q6wxRXG-I- a{text-decoration:underline}dl._2a0NH_GDQEQe5Ynfo7suVH{margin-top:36px;margin-bottom:0;padding:0;list-style:none;text-transform:none}dt._3j_LCPv7fyXv3A8FIXVwZ4{margin-top:20px;float:none;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:600;font-size:18px;line-height:24px;list-style:none}.k-vxTGFbdq1aOZB2HHpjh{margin:0;padding:0;border:none}._2Bucyy75c_ogoU1g-liB5R{margin:0;padding:0;border-bottom:none;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:600;font-size:18px;line-height:24px;text-transform:none}._63gwfzV8dclrsl2cfd90r{display:inline-block;margin-top:0;margin-bottom:13px;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px}._1l8wM_4mRYGz3Iu7l3BZR7{display:block}._2UE03QS02aZGkslegN_F-i{display:inline-block;position:relative;left:5px;margin-bottom:13px;margin-right:34px;padding:3px}div[dir="rtl"] ._2UE03QS02aZGkslegN_F-i{margin:0 0 13px 34px;padding:3px;float:none}div[dir="rtl"] ._2UE03QS02aZGkslegN_F-i{left:auto;right:5px}._23tra1HsiiP6cT-Cka-ycB *::before,._2bvsb3ubApyZ0UGoQA9O9T *::before,._23tra1HsiiP6cT-Cka-ycB *::after,._2bvsb3ubApyZ0UGoQA9O9T *::after{box-sizing:inherit}._1HSFn0HzGo6w4ADApV8-c4{outline:2px solid rgba(0,0,0,0.8)}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2{display:inline-block;position:relative;margin-top:0;margin-left:0;margin-right:0;height:0;width:0;border-radius:0;cursor:pointer;outline:none;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2+label::before{display:block;position:absolute;top:5px;left:3px;height:19px;width:19px;content:"";border-radius:50%;border:1px solid #000;background-color:#fff}div[dir="rtl"] input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2+label::before{left:auto;right:3px}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:hover::before{border:1px solid #0067B8}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:hover::after{display:block;position:absolute;top:10px;left:8px;height:9px;width:9px;content:"";border-radius:50%;background-color:rgba(0,0,0,0.8)}div[dir="rtl"] input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:hover::after{left:auto;right:8px}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:focus::before{border:1px solid #0067B8}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:focus::after{display:block;position:absolute;top:10px;left:8px;height:9px;width:9px;content:"";border-radius:50%;background-color:#000}div[dir="rtl"] input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:not(:disabled)+label:focus::after{left:auto;right:8px}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:checked+label::after{display:block;position:absolute;top:10px;left:8px;height:9px;width:9px;content:"";border-radius:50%;background-color:#000}div[dir="rtl"] input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:checked+label::after{left:auto;right:8px}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:disabled+label{cursor:not-allowed}input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:disabled+label::before{border:1px solid rgba(0,0,0,0.2);background-color:rgba(0,0,0,0.2)}._3RJzeL3l9Rl_lAQEm6VwdX{display:block;position:static;float:right;margin-top:0;margin-bottom:0;margin-left:19px;margin-right:0;padding-top:0;padding-bottom:0;padding-left:8px;padding-right:0;width:80%;width:calc(100% - 19px);font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px;text-transform:none;cursor:pointer;box-sizing:border-box}div[dir="rtl"] ._3RJzeL3l9Rl_lAQEm6VwdX{margin:0 19px 0 0;padding:0 8px 0 0;float:left}.nohp3sIG12ZBhzcMnPala{margin-top:20px;margin-bottom:48px}._2uhaEsmeotZ3P-M0AXo2kF{padding:0;width:278px;height:36px;cursor:pointer;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px;text-align:center}._2uhaEsmeotZ3P-M0AXo2kF:focus{box-sizing:border-box}._2uhaEsmeotZ3P-M0AXo2kF:disabled{cursor:not-allowed}._3tOu1FJ59c_xz_PmI1lKV5{float:right;padding:0;width:278px;height:36px;cursor:pointer;font-family:Segoe UI, SegoeUI, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:15px;line-height:20px;text-align:center}._3tOu1FJ59c_xz_PmI1lKV5:focus{box-sizing:border-box}._3tOu1FJ59c_xz_PmI1lKV5:disabled{cursor:not-allowed}div[dir="rtl"] ._3tOu1FJ59c_xz_PmI1lKV5{margin:0;padding:0;float:left}@media only screen and (max-width: 768px){._2j0fmugLb1FgYz6KPuB91w,._1Upc2NjY8AlDn177YoVj0y{padding-top:8px;padding-bottom:12px;padding-left:3.75%;padding-right:3.75%;margin:0;width:92.5%}._23tra1HsiiP6cT-Cka-ycB{display:block}._1XuCi2WhiqeWRUVp3pnFG3{margin-bottom:8px;margin-left:0;margin-right:0;width:100%}._2bvsb3ubApyZ0UGoQA9O9T{overflow:hidden}.AFsJE948muYyzCMktdzuk{top:1.8%;width:93.33%;height:96.4%;overflow:hidden}.uCYvKvHXrhjNgflv1VqdD{margin-top:24px;margin-left:24px;margin-right:24px;height:100%}._1kBkHQ1V1wu3kl-YcLgUr6{height:62%;height:calc(100% - 188px);min-height:50%}._2uhaEsmeotZ3P-M0AXo2kF{width:100%}._3tOu1FJ59c_xz_PmI1lKV5{margin-bottom:12px;margin-left:0;width:100%}div[dir="rtl"] ._3tOu1FJ59c_xz_PmI1lKV5{margin:0 0 12px 0;padding:0;float:none}}@media only screen and (max-width: 768px) and (orientation: landscape), only screen and (max-height: 260px), only screen and (max-width: 340px){.AFsJE948muYyzCMktdzuk{overflow:auto}}@media only screen and (max-height: 260px), only screen and (max-width: 340px){._1XuCi2WhiqeWRUVp3pnFG3{min-width:0}._3kWyBRbW_dgnMiEyx06Fu4{padding:3%}.uCYvKvHXrhjNgflv1VqdD{margin-top:3%;margin-left:3%;margin-right:3%}._17pX1m9O_W--iZbDt3Ta5r{margin-bottom:3%}._1kBkHQ1V1wu3kl-YcLgUr6{height:calc(79% - 64px)}.nohp3sIG12ZBhzcMnPala{margin-top:5%;margin-bottom:10%}._3tOu1FJ59c_xz_PmI1lKV5{margin-bottom:3%}div[dir="rtl"] ._3tOu1FJ59c_xz_PmI1lKV5{margin:0 0 3% 0;padding:0;float:none}}
+</style><style type="text/css" id="ms-consent-banner-theme-styles">._23tra1HsiiP6cT-Cka-ycB {
+            background-color: #F2F2F2 !important;
+        }.w8hcgFksdo30C8w-bygqu {
+            color: #000000 !important;
+        }.ydkKdaztSS0AeHWIeIHsQ a {
+            color: #0067B8 !important;
+        }._2bvsb3ubApyZ0UGoQA9O9T {
+            background-color: rgba(255, 255, 255, 0.6) !important;
+        }.AFsJE948muYyzCMktdzuk {
+            background-color: #FFFFFF !important;
+            border: 1px solid #0067B8 !important;
+        }._3kWyBRbW_dgnMiEyx06Fu4 {
+            color: #666666 !important;
+            background-color: #FFFFFF !important;
+        }._1zNQOqxpBFSokeCLGi_hGr {
+            border: none !important;
+            background-color: #0067B8 !important;
+            color: #FFFFFF !important;
+        }._1zNQOqxpBFSokeCLGi_hGr:enabled:hover {
+            color: #FFFFFF !important;
+            background-color: #0067B8 !important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25) !important;
+            border: none !important;
+        }._1zNQOqxpBFSokeCLGi_hGr:enabled:focus {
+            background-color: #0067B8 !important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25) !important;
+            border: 2px solid #000000 !important;
+        }._1zNQOqxpBFSokeCLGi_hGr:disabled {
+            opacity: 1 !important;
+            color: rgba(0, 0, 0, 0.2) !important;
+            background-color: rgba(0, 120, 215, 0.2) !important;
+            border: none !important;
+        }.erL690_8JwUW-R4bJRcfl {
+            border: none !important;
+            background-color: #EBEBEB !important;
+            color: #000000 !important;
+        }.erL690_8JwUW-R4bJRcfl:enabled:hover {
+            color: #000000 !important;
+            background-color: #DBDBDB !important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25) !important;
+            border: none !important;
+        }.erL690_8JwUW-R4bJRcfl:enabled:focus {
+            background-color: #DBDBDB !important;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25) !important;
+            border: 2px solid #000000 !important;
+        }.erL690_8JwUW-R4bJRcfl:disabled {
+            opacity: 1 !important;
+            color: rgba(0, 0, 0, 0.2) !important;
+            background-color: rgba(0, 0, 0, 0.2) !important;
+            border: none !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2 + label::before {
+            border: 1px solid #000000 !important;
+            background-color: #FFFFFF !important;
+        }._1HSFn0HzGo6w4ADApV8-c4 {
+            outline: 2px solid rgba(0, 0, 0, 0.8) !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:checked + label::after {
+            background-color: #000000 !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2 + label:hover::before {
+            border: 1px solid #0067B8 !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2 + label:hover::after {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2 + label:focus::before {
+            border: 1px solid #0067B8 !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2 + label:focus::after {
+            background-color: #000000 !important;
+        }input[type="radio"]._1dp8Vp5m3HwAqGx8qBmFV2:disabled + label::before {
+            border: 1px solid rgba(0, 0, 0, 0.2) !important;
+            background-color: rgba(0, 0, 0, 0.2) !important;
+        }</style></head>
+
+<body class="win">
+	<!-- Setting theme here to avoid FOUC -->
+	<script>
+		function setTheme(themeName) {
+			if (themeName === 'dark') {
+				document.documentElement.removeAttribute('data-theme'); // dark is default, so no data-theme attribute needed
+			}
+
+			if (themeName === 'light') {
+				document.documentElement.setAttribute('data-theme', themeName);
+			}
+			return;
+		}
+
+		// Determine initial theme: user preference or system preference
+		let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+		setTheme(theme); // Apply the initial theme
+
+		// Listen for changes in the system theme preference
+		window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+			if (!localStorage.getItem('theme')) { // Only if no user preference is saved
+				setTheme(e.matches ? 'dark' : 'light');
+			}
+		});
+	</script>
+
+	<div id="main">
+		<div class="navbar-fixed-container">
+			<div class="navbar navbar-inverse navbar-fixed-top ">
+				<div id="cookie-banner"></div>		<nav role="navigation" aria-label="Top Level">
+					<div class="container">
+						<div class="nav navbar-header">
+							<a class="navbar-brand" href="https://code.visualstudio.com/"><span>Visual Studio Code</span></a>
+						</div>
+						<div class="navbar-collapse collapse" style="max-height: min(60vh, 450px);">
+							<ul class="nav navbar-nav navbar-left">
+								<li class="active"><a id="nav-docs" href="https://code.visualstudio.com/docs">Docs</a></li>
+								<li><a id="nav-updates" href="https://code.visualstudio.com/updates">Updates</a>
+								</li>
+								<li><a id="nav-blogs" href="https://code.visualstudio.com/blogs">Blog</a></li>
+								<li><a id="nav-extend" href="https://code.visualstudio.com/api">API</a></li>
+								<li><a href="https://marketplace.visualstudio.com/VSCode" target="_blank" rel="noopener" id="nav-extensions">Extensions</a></li>
+								<li><a id="nav-mcp" href="https://code.visualstudio.com/mcp">MCP</a></li>
+								<li><a id="nav-faqs" href="https://code.visualstudio.com/docs/supporting/faq">FAQ</a>
+								</li>
+								<li><a id="nav-events" href="https://aka.ms/vscode/events" target="_blank" rel="noopener">Events</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right" role="presentation">
+								<li>
+									<a class="link-button" href="https://code.visualstudio.com/Download" id="nav-download">
+										<span>Download</span>
+									</a><div class="tabloopElement" tabindex="0" style="display: none;"></div>
+								</li>
+							</ul>
+						</div>
+						<div class="navbar-actions">
+							<div class="search" role="presentation">
+								<div class="nav-search search-control" role="button" tabindex="0" aria-label="Open search dialog">
+									<div class="input-group" role="presentation">
+										<span class="input-group-btn">
+											<span class="btn search-icon-container" aria-hidden="true">
+												<img class="search-icon-dark" src="./Data Science in VS Code tutorial_files/search-dark.svg" alt="">
+												<img class="search-icon-light" src="./Data Science in VS Code tutorial_files/search.svg" alt="">
+											</span>
+										</span>
+										<span class="search-box form-control" aria-hidden="true" role="presentation"></span>
+										<span class="search-shortcut-placeholder">Search</span>
+										<span class="search-shortcut-overlay" style="opacity: 0.7;">Ctrl+Shift+P</span>
+									</div>
+								</div>					</div>
+							<button type="button" class="theme-switch" id="theme-toggle">
+								<img class="theme-icon-light" src="./Data Science in VS Code tutorial_files/theme-light.svg" alt="Switch to the dark theme">
+								<img class="theme-icon-dark" src="./Data Science in VS Code tutorial_files/theme-dark.svg" alt="Switch to the light theme">
+							</button>
+							<a class="link-button navbar-actions-download" href="https://code.visualstudio.com/Download">
+								<span>Download</span>
+							</a>
+						</div>
+						<div class="tabloopElement" tabindex="0" style="display: none;"></div><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Expand and Collapse Menu">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+				</nav>
+			</div>
+		</div>		<div data-announcement-version="2026-02-10-vscode-events" class="updates-banner">
+			<div class="container">
+				<p class="message"><a href="https://aka.ms/vscode/events" target="_blank" rel="noopener" id="banner-link-updates">VS Code February events</a> – Agent Sessions Day on Feb 19th</p>
+			</div>
+			<div tabindex="0" role="button" title="Dismiss this update" class="dismiss-btn" id="banner-dismiss-btn"><span class="sr-only">Dismiss this update</span><span aria-hidden="true" class="glyph-icon"></span></div>
+		</div>		<!-- This div wraps around the entire site -->
+		<!-- The body itself should already have a main tag -->
+		<main id="main-content">
+			<script>
+    function closeReportIssue() {
+        var element = document.getElementById('surveypopup');
+        element.parentElement.removeChild(element);
+    }
+
+    function reportIssue(tutorial, page) {
+        var div = document.createElement('div');
+        div.innerHTML = '<div id="surveypopup" class="overlay visible"><div class="surveypopup"><div id="surveytitle">Tell us more<a href="javascript:void(0)" onclick="closeReportIssue()">X</a></div><div id="surveydiv"><iframe frameBorder="0" scrolling="0" src="https://www.research.net/r/PWZWZ52?tutorial=' + tutorial + '&step=' + page + '"></iframe></div></div></div>';
+        document.body.appendChild(div.children[0]);
+    }
+</script>
+
+<div class="body-content docs docs-github-layout">
+    <div class="docs-layout-wrapper">
+        <!-- Left sidebar - Table of Contents -->
+        <aside class="docs-left-sidebar">
+            <nav id="docs-navbar" aria-label="Topics" class="docs-nav visible-md visible-lg">
+              <ul class="nav" id="main-nav">
+              <li>
+                <a class="docs-home" href="https://code.visualstudio.com/docs">Overview</a>
+              </li>
+              
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#setup-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Setup</a>
+              <ul id="setup-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/setup-overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/linux">Linux</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/mac">macOS</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/windows">Windows</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/vscode-web">VS Code for the Web</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/raspberry-pi">Raspberry Pi</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/network">Network</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/additional-components">Additional Components</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/setup/uninstall">Uninstall</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#getstarted-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Get Started</a>
+              <ul id="getstarted-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/getting-started">VS Code Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/copilot-quickstart">Copilot Quickstart</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/userinterface">User Interface</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/personalize-vscode">Personalize VS Code</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/extensions">Install Extensions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks">Tips and Tricks</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/getstarted/introvideos">Intro Videos</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#configure-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Configure</a>
+              <ul id="configure-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/locales">Display Language</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/custom-layout">Layout</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/keybindings">Keyboard Shortcuts</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/settings">Settings</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/settings-sync">Settings Sync</a>
+                    </li>
+                      
+            <li class="panel">
+              <a class="area disabled" tabindex="-1" aria-disabled="true">Extensions</a>
+              <ul id="configure-extensions-articles" class="collapse in" aria-expanded="true">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/extensions/extension-marketplace">Extension Marketplace</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/extensions/extension-runtime-security">Extension Runtime Security</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/themes">Themes</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/profiles">Profiles</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#configure-accessibility-articles" data-toggle="collapse" aria-expanded="false">Accessibility</a>
+              <ul id="configure-accessibility-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/accessibility/accessibility">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/accessibility/voice">Voice Interactions</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/command-line">Command Line Interface</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/configure/telemetry">Telemetry</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#editing-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Edit Code</a>
+              <ul id="editing-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/codebasics">Basic Editing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/intellisense">IntelliSense</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/editingevolved">Code Navigation</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/refactoring">Refactoring</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/userdefinedsnippets">Snippets</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#editing-workspaces-articles" data-toggle="collapse" aria-expanded="false">Workspaces</a>
+              <ul id="editing-workspaces-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/workspaces/workspaces">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/workspaces/multi-root-workspaces">Multi-Root Workspaces</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/editing/workspaces/workspace-trust">Workspace Trust</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#debugtest-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Build, Debug, Test</a>
+              <ul id="debugtest-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/tasks">Tasks</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/debugging">Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/debugging-configuration">Debug Configuration</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/testing">Testing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/port-forwarding">Port Forwarding</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/debugtest/integrated-browser">Integrated Browser</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">GitHub Copilot</a>
+              <ul id="copilot-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/setup">Setup</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/getting-started">Quickstart</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/best-practices">Best Practices</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-agents-articles" data-toggle="collapse" aria-expanded="false">Agents</a>
+              <ul id="copilot-agents-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/agents-tutorial">Agents Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/planning">Planning</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/agent-tools">Tools</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/subagents">Subagents</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/local-agents">Local Agents</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/background-agents">Background Agents</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/cloud-agents">Cloud Agents</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/agents/third-party-agents">Third-Party Agents</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-customization-articles" data-toggle="collapse" aria-expanded="false">Customization</a>
+              <ul id="copilot-customization-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/custom-instructions">Instructions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/prompt-files">Prompt Files</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents">Custom Agents</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/agent-skills">Agent Skills</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/language-models">Language Models</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/mcp-servers">MCP</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/customization/hooks">Hooks</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-chat-articles" data-toggle="collapse" aria-expanded="false">Chat</a>
+              <ul id="copilot-chat-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/inline-chat">Inline Chat</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/chat-sessions">Chat Sessions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context">Add Context</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/prompt-examples">Prompt Examples</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/review-code-edits">Review Edits</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/chat-checkpoints">Checkpoints</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/chat/chat-debug-view">Chat Debug View</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/ai-powered-suggestions">Inline Suggestions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/copilot-smart-actions">Smart Actions</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-guides-articles" data-toggle="collapse" aria-expanded="false">Guides</a>
+              <ul id="copilot-guides-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/prompt-engineering-guide">Prompt Engineering</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide">Context Engineering</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/test-driven-development-guide">Test-Driven Development</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/notebooks-with-ai">Edit Notebooks with AI</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/test-with-copilot">Test with AI</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/debug-with-copilot">Debug with AI</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/guides/mcp-developer-guide">MCP Dev Guide</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/security">Security</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/troubleshooting">Troubleshooting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/faq">FAQ</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#copilot-reference-articles" data-toggle="collapse" aria-expanded="false">Reference</a>
+              <ul id="copilot-reference-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/reference/copilot-vscode-features">Cheat Sheet</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/reference/copilot-settings">Settings Reference</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/copilot/reference/workspace-context">Workspace Context</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#sourcecontrol-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Source Control</a>
+              <ul id="sourcecontrol-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/quickstart">Quickstart</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/staging-commits">Staging &amp; Committing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/branches-worktrees">Branches &amp; Worktrees</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/repos-remotes">Repositories &amp; Remotes</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/merge-conflicts">Merge Conflicts</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/github">Collaborate on GitHub</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/troubleshooting">Troubleshooting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/sourcecontrol/faq">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#terminal-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Terminal</a>
+              <ul id="terminal-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/getting-started">Getting Started Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/basics">Terminal Basics</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/profiles">Terminal Profiles</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/shell-integration">Shell Integration</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/appearance">Appearance</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/terminal/advanced">Advanced</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#enterprise-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Enterprise</a>
+              <ul id="enterprise-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/policies">Enterprise Policies</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/ai-settings">AI Settings</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/extensions">Extensions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/telemetry">Telemetry</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/enterprise/updates">Updates</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#languages-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Languages</a>
+              <ul id="languages-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/javascript">JavaScript</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/json">JSON</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/html">HTML</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/emmet">Emmet</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/css">CSS, SCSS and Less</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/typescript">TypeScript</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/markdown">Markdown</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/powershell">PowerShell</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/cpp">C++</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/java">Java</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/php">PHP</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/python">Python</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/julia">Julia</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/r">R</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/ruby">Ruby</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/rust">Rust</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/go">Go</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/tsql">T-SQL</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/csharp">C#</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/dotnet">.NET</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/polyglot">Polyglot</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/languages/swift">Swift</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#nodejs-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Node.js / JavaScript</a>
+              <ul id="nodejs-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/working-with-javascript">Working with JavaScript</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/nodejs-tutorial">Node.js Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/nodejs-debugging">Node.js Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/nodejs-deployment">Deploy Node.js Apps</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/browser-debugging">Browser Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/angular-tutorial">Angular Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/reactjs-tutorial">React Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/vuejs-tutorial">Vue Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/debugging-recipes">Debugging Recipes</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/profiling">Performance Profiling</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/nodejs/extensions">Extensions</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#typescript-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">TypeScript</a>
+              <ul id="typescript-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/typescript/typescript-tutorial">Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/typescript/typescript-compiling">Compiling</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/typescript/typescript-editing">Editing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/typescript/typescript-refactoring">Refactoring</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/typescript/typescript-debugging">Debugging</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#python-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Python</a>
+              <ul id="python-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/python-quick-start">Quick Start</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/python-tutorial">Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/run">Run Python Code</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/editing">Editing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/linting">Linting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/formatting">Formatting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/debugging">Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/environments">Environments</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/testing">Testing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/jupyter-support-py">Python Interactive</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/tutorial-django">Django Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/tutorial-fastapi">FastAPI Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/tutorial-flask">Flask Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/tutorial-create-containers">Create Containers</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/python-on-azure">Deploy Python Apps</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/python-web">Python in the Web</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/python/settings-reference">Settings Reference</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#java-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Java</a>
+              <ul id="java-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-tutorial">Getting Started</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-editing">Navigate and Edit</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-refactoring">Refactoring</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-linting">Formatting and Linting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-project">Project Management</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-build">Build Tools</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-debugging">Run and Debug</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-testing">Testing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-spring-boot">Spring Boot</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-app-mod">Modernizing Java Apps</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-tomcat-jetty">Application Servers</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-on-azure">Deploy Java Apps</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-gui">GUI Applications</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/extensions">Extensions</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/java/java-faq">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#cpp-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">C++</a>
+              <ul id="cpp-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/introvideos-cpp">Intro Videos</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/config-linux">GCC on Linux</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/config-mingw">GCC on Windows</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/config-wsl">GCC on Windows Subsystem for Linux</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/config-clang-mac">Clang on macOS</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/config-msvc">Microsoft C++ on Windows</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/build-with-cmake">Build with CMake</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cmake-linux">CMake Tools on Linux</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cmake-quickstart">CMake Quick Start</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cpp-devtools">C++ Dev Tools for Copilot</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cpp-ide">Editing and Navigating</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cpp-debug">Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/launch-json-reference">Configure Debugging</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/cpp-refactoring">Refactoring</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/customize-cpp-settings">Settings Reference</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/configure-intellisense">Configure IntelliSense</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/configure-intellisense-crosscompilation">Configure IntelliSense for Cross-Compiling</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/cpp/faq-cpp">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#csharp-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">C#</a>
+              <ul id="csharp-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/introvideos-csharp">Intro Videos</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/get-started">Get Started</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/navigate-edit">Navigate and Edit</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/intellicode">IntelliCode</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/refactoring">Refactoring</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/formatting-linting">Formatting and Linting</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/project-management">Project Management</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/build-tools">Build Tools</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/package-management">Package Management</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/debugging">Run and Debug</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/testing">Testing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/csharp/cs-dev-kit-faq">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#containers-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Container Tools</a>
+              <ul id="containers-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/quickstart-node">Node.js</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/quickstart-python">Python</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/quickstart-aspnet-core">ASP.NET Core</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/debug-common">Debug</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/docker-compose">Docker Compose</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/quickstart-container-registries">Registries</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/app-service">Deploy to Azure</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/choosing-dev-environment">Choose a Dev Environment</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/reference">Customize</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/bridge-to-kubernetes">Develop with Kubernetes</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/containers/troubleshooting">Tips and Tricks</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel active expanded">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#datascience-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="true">Data Science</a>
+              <ul id="datascience-articles" class="collapse in" aria-expanded="true">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">Jupyter Notebooks</a>
+                    </li>
+                      
+                    <li class="active">
+                      <a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial" aria-label="Current Page: Data Science Tutorial">Data Science Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/python-interactive">Python Interactive</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/data-wrangler-quick-start">Data Wrangler Quick Start</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/data-wrangler">Data Wrangler</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/pytorch-support">PyTorch Support</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/azure-machine-learning">Azure Machine Learning</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/jupyter-kernel-management">Manage Jupyter Kernels</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/notebooks-web">Jupyter Notebooks on the Web</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/datascience/microsoft-fabric-quickstart">Data Science in Microsoft Fabric</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#intelligentapps-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Intelligent Apps</a>
+              <ul id="intelligentapps-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/overview">AI Toolkit Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/copilot-tools">AI Toolkit Copilot Tools</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/models">Models</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/playground">Playground</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/agentbuilder">Agent Builder</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/bulkrun">Bulk Run</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/evaluation">Evaluation</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/finetune">Fine-Tuning (Automated Setup)</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/finetune-legacy">Fine-Tuning (Project Template)</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/modelconversion">Model Conversion</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/tracing">Tracing</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/profiling">Profiling (Windows ML)</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/faq">FAQ</a>
+                    </li>
+                      
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#intelligentapps-reference-articles" data-toggle="collapse" aria-expanded="false">Reference</a>
+              <ul id="intelligentapps-reference-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/reference/FileStructure">File Structure</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/reference/ManualModelConversion">Manual Model Conversion</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/reference/ManualConversionOnGPU">Manual Model Conversion on GPU</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/reference/SetupWithoutAITK">Setup Environment Without AI Toolkit</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/intelligentapps/reference/TemplateProject">Template Project</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                    
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#azure-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Azure</a>
+              <ul id="azure-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/gettingstarted">Getting Started</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/resourcesextension">Resources View</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/deployment">Deployment</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/vscodeforweb">VS Code for the Web - Azure</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/containers">Containers</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/aksextensions">Azure Kubernetes Service</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/kubernetes">Kubernetes</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/mongodb">MongoDB</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/azure/remote-debugging">Remote Debugging for Node.js</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#remote-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Remote</a>
+              <ul id="remote-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/remote-overview">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/ssh">SSH</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/dev-containers">Dev Containers</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/wsl">Windows Subsystem for Linux</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/codespaces">GitHub Codespaces</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/vscode-server">VS Code Server</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/tunnels">Tunnels</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/ssh-tutorial">SSH Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/wsl-tutorial">WSL Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/troubleshooting">Tips and Tricks</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/remote/faq">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#devcontainers-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Dev Containers</a>
+              <ul id="devcontainers-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/containers">Overview</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/tutorial">Tutorial</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/attach-container">Attach to Container</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/create-dev-container">Create Dev Container</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/containers-advanced">Advanced Containers</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/devcontainerjson-reference">devcontainer.json</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/devcontainer-cli">Dev Container CLI</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/tips-and-tricks">Tips and Tricks</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/devcontainers/faq">FAQ</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+            <li class="panel collapsed">
+              <a class="area" role="button" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#reference-articles" data-parent="#main-nav" data-toggle="collapse" aria-expanded="false">Reference</a>
+              <ul id="reference-articles" class="collapse " aria-expanded="false">
+            
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/reference/default-keybindings">Default Keyboard Shortcuts</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/reference/default-settings">Default Settings</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/reference/variables-reference">Substitution Variables</a>
+                    </li>
+                      
+                    <li>
+                      <a href="https://code.visualstudio.com/docs/reference/tasks-appendix">Tasks Schema</a>
+                    </li>
+                      
+              </ul>
+            </li>
+                
+              </ul>
+            </nav>
+            
+            <nav id="small-nav" aria-label="Topics" class="docs-nav hidden-md hidden-lg">
+              <label class="faux-h4" for="small-nav-dropdown">Topics</label>
+              <select id="small-nav-dropdown" aria-label="topics">
+                <option value="/docs">Overview</option>
+            
+              <optgroup label="Setup">
+            
+                    <option value="/docs/setup/setup-overview">Overview</option>
+                    
+                    <option value="/docs/setup/linux">Linux</option>
+                    
+                    <option value="/docs/setup/mac">macOS</option>
+                    
+                    <option value="/docs/setup/windows">Windows</option>
+                    
+                    <option value="/docs/setup/vscode-web">VS Code for the Web</option>
+                    
+                    <option value="/docs/setup/raspberry-pi">Raspberry Pi</option>
+                    
+                    <option value="/docs/setup/network">Network</option>
+                    
+                    <option value="/docs/setup/additional-components">Additional Components</option>
+                    
+                    <option value="/docs/setup/uninstall">Uninstall</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Get Started">
+            
+                    <option value="/docs/getstarted/getting-started">VS Code Tutorial</option>
+                    
+                    <option value="/docs/getstarted/copilot-quickstart">Copilot Quickstart</option>
+                    
+                    <option value="/docs/getstarted/userinterface">User Interface</option>
+                    
+                    <option value="/docs/getstarted/personalize-vscode">Personalize VS Code</option>
+                    
+                    <option value="/docs/getstarted/extensions">Install Extensions</option>
+                    
+                    <option value="/docs/getstarted/tips-and-tricks">Tips and Tricks</option>
+                    
+                    <option value="/docs/getstarted/introvideos">Intro Videos</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Configure">
+            
+                    <option value="/docs/configure/locales">Display Language</option>
+                    
+                    <option value="/docs/configure/custom-layout">Layout</option>
+                    
+                    <option value="/docs/configure/keybindings">Keyboard Shortcuts</option>
+                    
+                    <option value="/docs/configure/settings">Settings</option>
+                    
+                    <option value="/docs/configure/settings-sync">Settings Sync</option>
+                    
+                    </optgroup><optgroup label="Configure - Extensions">
+            
+                      <option value="/docs/configure/extensions/extension-marketplace">Extension Marketplace</option>
+                      
+                      <option value="/docs/configure/extensions/extension-runtime-security">Extension Runtime Security</option>
+                      
+                    </optgroup>
+            
+                    <option value="/docs/configure/themes">Themes</option>
+                    
+                    <option value="/docs/configure/profiles">Profiles</option>
+                    
+                    <optgroup label="Configure - Accessibility">
+            
+                      <option value="/docs/configure/accessibility/accessibility">Overview</option>
+                      
+                      <option value="/docs/configure/accessibility/voice">Voice Interactions</option>
+                      
+                    </optgroup>
+            
+                    <option value="/docs/configure/command-line">Command Line Interface</option>
+                    
+                    <option value="/docs/configure/telemetry">Telemetry</option>
+                    
+              
+              
+              <optgroup label="Edit Code">
+            
+                    <option value="/docs/editing/codebasics">Basic Editing</option>
+                    
+                    <option value="/docs/editing/intellisense">IntelliSense</option>
+                    
+                    <option value="/docs/editing/editingevolved">Code Navigation</option>
+                    
+                    <option value="/docs/editing/refactoring">Refactoring</option>
+                    
+                    <option value="/docs/editing/userdefinedsnippets">Snippets</option>
+                    
+                    </optgroup><optgroup label="Edit Code - Workspaces">
+            
+                      <option value="/docs/editing/workspaces/workspaces">Overview</option>
+                      
+                      <option value="/docs/editing/workspaces/multi-root-workspaces">Multi-Root Workspaces</option>
+                      
+                      <option value="/docs/editing/workspaces/workspace-trust">Workspace Trust</option>
+                      
+                    </optgroup>
+            
+              
+              
+              <optgroup label="Build, Debug, Test">
+            
+                    <option value="/docs/debugtest/tasks">Tasks</option>
+                    
+                    <option value="/docs/debugtest/debugging">Debugging</option>
+                    
+                    <option value="/docs/debugtest/debugging-configuration">Debug Configuration</option>
+                    
+                    <option value="/docs/debugtest/testing">Testing</option>
+                    
+                    <option value="/docs/debugtest/port-forwarding">Port Forwarding</option>
+                    
+                    <option value="/docs/debugtest/integrated-browser">Integrated Browser</option>
+                    
+              </optgroup>
+              
+              <optgroup label="GitHub Copilot">
+            
+                    <option value="/docs/copilot/overview">Overview</option>
+                    
+                    <option value="/docs/copilot/setup">Setup</option>
+                    
+                    <option value="/docs/copilot/getting-started">Quickstart</option>
+                    
+                    <option value="/docs/copilot/best-practices">Best Practices</option>
+                    
+                    </optgroup><optgroup label="GitHub Copilot - Agents">
+            
+                      <option value="/docs/copilot/agents/overview">Overview</option>
+                      
+                      <option value="/docs/copilot/agents/agents-tutorial">Agents Tutorial</option>
+                      
+                      <option value="/docs/copilot/agents/planning">Planning</option>
+                      
+                      <option value="/docs/copilot/agents/agent-tools">Tools</option>
+                      
+                      <option value="/docs/copilot/agents/subagents">Subagents</option>
+                      
+                      <option value="/docs/copilot/agents/local-agents">Local Agents</option>
+                      
+                      <option value="/docs/copilot/agents/background-agents">Background Agents</option>
+                      
+                      <option value="/docs/copilot/agents/cloud-agents">Cloud Agents</option>
+                      
+                      <option value="/docs/copilot/agents/third-party-agents">Third-Party Agents</option>
+                      
+                    </optgroup>
+            
+                    <optgroup label="GitHub Copilot - Customization">
+            
+                      <option value="/docs/copilot/customization/overview">Overview</option>
+                      
+                      <option value="/docs/copilot/customization/custom-instructions">Instructions</option>
+                      
+                      <option value="/docs/copilot/customization/prompt-files">Prompt Files</option>
+                      
+                      <option value="/docs/copilot/customization/custom-agents">Custom Agents</option>
+                      
+                      <option value="/docs/copilot/customization/agent-skills">Agent Skills</option>
+                      
+                      <option value="/docs/copilot/customization/language-models">Language Models</option>
+                      
+                      <option value="/docs/copilot/customization/mcp-servers">MCP</option>
+                      
+                      <option value="/docs/copilot/customization/hooks">Hooks</option>
+                      
+                    </optgroup>
+            
+                    <optgroup label="GitHub Copilot - Chat">
+            
+                      <option value="/docs/copilot/chat/copilot-chat">Overview</option>
+                      
+                      <option value="/docs/copilot/chat/inline-chat">Inline Chat</option>
+                      
+                      <option value="/docs/copilot/chat/chat-sessions">Chat Sessions</option>
+                      
+                      <option value="/docs/copilot/chat/copilot-chat-context">Add Context</option>
+                      
+                      <option value="/docs/copilot/chat/prompt-examples">Prompt Examples</option>
+                      
+                      <option value="/docs/copilot/chat/review-code-edits">Review Edits</option>
+                      
+                      <option value="/docs/copilot/chat/chat-checkpoints">Checkpoints</option>
+                      
+                      <option value="/docs/copilot/chat/chat-debug-view">Chat Debug View</option>
+                      
+                    </optgroup>
+            
+                    <option value="/docs/copilot/ai-powered-suggestions">Inline Suggestions</option>
+                    
+                    <option value="/docs/copilot/copilot-smart-actions">Smart Actions</option>
+                    
+                    <optgroup label="GitHub Copilot - Guides">
+            
+                      <option value="/docs/copilot/guides/prompt-engineering-guide">Prompt Engineering</option>
+                      
+                      <option value="/docs/copilot/guides/context-engineering-guide">Context Engineering</option>
+                      
+                      <option value="/docs/copilot/guides/test-driven-development-guide">Test-Driven Development</option>
+                      
+                      <option value="/docs/copilot/guides/notebooks-with-ai">Edit Notebooks with AI</option>
+                      
+                      <option value="/docs/copilot/guides/test-with-copilot">Test with AI</option>
+                      
+                      <option value="/docs/copilot/guides/debug-with-copilot">Debug with AI</option>
+                      
+                      <option value="/docs/copilot/guides/mcp-developer-guide">MCP Dev Guide</option>
+                      
+                    </optgroup>
+            
+                    <option value="/docs/copilot/security">Security</option>
+                    
+                    <option value="/docs/copilot/troubleshooting">Troubleshooting</option>
+                    
+                    <option value="/docs/copilot/faq">FAQ</option>
+                    
+                    <optgroup label="GitHub Copilot - Reference">
+            
+                      <option value="/docs/copilot/reference/copilot-vscode-features">Cheat Sheet</option>
+                      
+                      <option value="/docs/copilot/reference/copilot-settings">Settings Reference</option>
+                      
+                      <option value="/docs/copilot/reference/workspace-context">Workspace Context</option>
+                      
+                    </optgroup>
+            
+              
+              
+              <optgroup label="Source Control">
+            
+                    <option value="/docs/sourcecontrol/overview">Overview</option>
+                    
+                    <option value="/docs/sourcecontrol/quickstart">Quickstart</option>
+                    
+                    <option value="/docs/sourcecontrol/staging-commits">Staging &amp; Committing</option>
+                    
+                    <option value="/docs/sourcecontrol/branches-worktrees">Branches &amp; Worktrees</option>
+                    
+                    <option value="/docs/sourcecontrol/repos-remotes">Repositories &amp; Remotes</option>
+                    
+                    <option value="/docs/sourcecontrol/merge-conflicts">Merge Conflicts</option>
+                    
+                    <option value="/docs/sourcecontrol/github">Collaborate on GitHub</option>
+                    
+                    <option value="/docs/sourcecontrol/troubleshooting">Troubleshooting</option>
+                    
+                    <option value="/docs/sourcecontrol/faq">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Terminal">
+            
+                    <option value="/docs/terminal/getting-started">Getting Started Tutorial</option>
+                    
+                    <option value="/docs/terminal/basics">Terminal Basics</option>
+                    
+                    <option value="/docs/terminal/profiles">Terminal Profiles</option>
+                    
+                    <option value="/docs/terminal/shell-integration">Shell Integration</option>
+                    
+                    <option value="/docs/terminal/appearance">Appearance</option>
+                    
+                    <option value="/docs/terminal/advanced">Advanced</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Enterprise">
+            
+                    <option value="/docs/enterprise/overview">Overview</option>
+                    
+                    <option value="/docs/enterprise/policies">Enterprise Policies</option>
+                    
+                    <option value="/docs/enterprise/ai-settings">AI Settings</option>
+                    
+                    <option value="/docs/enterprise/extensions">Extensions</option>
+                    
+                    <option value="/docs/enterprise/telemetry">Telemetry</option>
+                    
+                    <option value="/docs/enterprise/updates">Updates</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Languages">
+            
+                    <option value="/docs/languages/overview">Overview</option>
+                    
+                    <option value="/docs/languages/javascript">JavaScript</option>
+                    
+                    <option value="/docs/languages/json">JSON</option>
+                    
+                    <option value="/docs/languages/html">HTML</option>
+                    
+                    <option value="/docs/languages/emmet">Emmet</option>
+                    
+                    <option value="/docs/languages/css">CSS, SCSS and Less</option>
+                    
+                    <option value="/docs/languages/typescript">TypeScript</option>
+                    
+                    <option value="/docs/languages/markdown">Markdown</option>
+                    
+                    <option value="/docs/languages/powershell">PowerShell</option>
+                    
+                    <option value="/docs/languages/cpp">C++</option>
+                    
+                    <option value="/docs/languages/java">Java</option>
+                    
+                    <option value="/docs/languages/php">PHP</option>
+                    
+                    <option value="/docs/languages/python">Python</option>
+                    
+                    <option value="/docs/languages/julia">Julia</option>
+                    
+                    <option value="/docs/languages/r">R</option>
+                    
+                    <option value="/docs/languages/ruby">Ruby</option>
+                    
+                    <option value="/docs/languages/rust">Rust</option>
+                    
+                    <option value="/docs/languages/go">Go</option>
+                    
+                    <option value="/docs/languages/tsql">T-SQL</option>
+                    
+                    <option value="/docs/languages/csharp">C#</option>
+                    
+                    <option value="/docs/languages/dotnet">.NET</option>
+                    
+                    <option value="/docs/languages/polyglot">Polyglot</option>
+                    
+                    <option value="/docs/languages/swift">Swift</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Node.js / JavaScript">
+            
+                    <option value="/docs/nodejs/working-with-javascript">Working with JavaScript</option>
+                    
+                    <option value="/docs/nodejs/nodejs-tutorial">Node.js Tutorial</option>
+                    
+                    <option value="/docs/nodejs/nodejs-debugging">Node.js Debugging</option>
+                    
+                    <option value="/docs/nodejs/nodejs-deployment">Deploy Node.js Apps</option>
+                    
+                    <option value="/docs/nodejs/browser-debugging">Browser Debugging</option>
+                    
+                    <option value="/docs/nodejs/angular-tutorial">Angular Tutorial</option>
+                    
+                    <option value="/docs/nodejs/reactjs-tutorial">React Tutorial</option>
+                    
+                    <option value="/docs/nodejs/vuejs-tutorial">Vue Tutorial</option>
+                    
+                    <option value="/docs/nodejs/debugging-recipes">Debugging Recipes</option>
+                    
+                    <option value="/docs/nodejs/profiling">Performance Profiling</option>
+                    
+                    <option value="/docs/nodejs/extensions">Extensions</option>
+                    
+              </optgroup>
+              
+              <optgroup label="TypeScript">
+            
+                    <option value="/docs/typescript/typescript-tutorial">Tutorial</option>
+                    
+                    <option value="/docs/typescript/typescript-compiling">Compiling</option>
+                    
+                    <option value="/docs/typescript/typescript-editing">Editing</option>
+                    
+                    <option value="/docs/typescript/typescript-refactoring">Refactoring</option>
+                    
+                    <option value="/docs/typescript/typescript-debugging">Debugging</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Python">
+            
+                    <option value="/docs/python/python-quick-start">Quick Start</option>
+                    
+                    <option value="/docs/python/python-tutorial">Tutorial</option>
+                    
+                    <option value="/docs/python/run">Run Python Code</option>
+                    
+                    <option value="/docs/python/editing">Editing</option>
+                    
+                    <option value="/docs/python/linting">Linting</option>
+                    
+                    <option value="/docs/python/formatting">Formatting</option>
+                    
+                    <option value="/docs/python/debugging">Debugging</option>
+                    
+                    <option value="/docs/python/environments">Environments</option>
+                    
+                    <option value="/docs/python/testing">Testing</option>
+                    
+                    <option value="/docs/python/jupyter-support-py">Python Interactive</option>
+                    
+                    <option value="/docs/python/tutorial-django">Django Tutorial</option>
+                    
+                    <option value="/docs/python/tutorial-fastapi">FastAPI Tutorial</option>
+                    
+                    <option value="/docs/python/tutorial-flask">Flask Tutorial</option>
+                    
+                    <option value="/docs/python/tutorial-create-containers">Create Containers</option>
+                    
+                    <option value="/docs/python/python-on-azure">Deploy Python Apps</option>
+                    
+                    <option value="/docs/python/python-web">Python in the Web</option>
+                    
+                    <option value="/docs/python/settings-reference">Settings Reference</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Java">
+            
+                    <option value="/docs/java/java-tutorial">Getting Started</option>
+                    
+                    <option value="/docs/java/java-editing">Navigate and Edit</option>
+                    
+                    <option value="/docs/java/java-refactoring">Refactoring</option>
+                    
+                    <option value="/docs/java/java-linting">Formatting and Linting</option>
+                    
+                    <option value="/docs/java/java-project">Project Management</option>
+                    
+                    <option value="/docs/java/java-build">Build Tools</option>
+                    
+                    <option value="/docs/java/java-debugging">Run and Debug</option>
+                    
+                    <option value="/docs/java/java-testing">Testing</option>
+                    
+                    <option value="/docs/java/java-spring-boot">Spring Boot</option>
+                    
+                    <option value="/docs/java/java-app-mod">Modernizing Java Apps</option>
+                    
+                    <option value="/docs/java/java-tomcat-jetty">Application Servers</option>
+                    
+                    <option value="/docs/java/java-on-azure">Deploy Java Apps</option>
+                    
+                    <option value="/docs/java/java-gui">GUI Applications</option>
+                    
+                    <option value="/docs/java/extensions">Extensions</option>
+                    
+                    <option value="/docs/java/java-faq">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="C++">
+            
+                    <option value="/docs/cpp/introvideos-cpp">Intro Videos</option>
+                    
+                    <option value="/docs/cpp/config-linux">GCC on Linux</option>
+                    
+                    <option value="/docs/cpp/config-mingw">GCC on Windows</option>
+                    
+                    <option value="/docs/cpp/config-wsl">GCC on Windows Subsystem for Linux</option>
+                    
+                    <option value="/docs/cpp/config-clang-mac">Clang on macOS</option>
+                    
+                    <option value="/docs/cpp/config-msvc">Microsoft C++ on Windows</option>
+                    
+                    <option value="/docs/cpp/build-with-cmake">Build with CMake</option>
+                    
+                    <option value="/docs/cpp/cmake-linux">CMake Tools on Linux</option>
+                    
+                    <option value="/docs/cpp/cmake-quickstart">CMake Quick Start</option>
+                    
+                    <option value="/docs/cpp/cpp-devtools">C++ Dev Tools for Copilot</option>
+                    
+                    <option value="/docs/cpp/cpp-ide">Editing and Navigating</option>
+                    
+                    <option value="/docs/cpp/cpp-debug">Debugging</option>
+                    
+                    <option value="/docs/cpp/launch-json-reference">Configure Debugging</option>
+                    
+                    <option value="/docs/cpp/cpp-refactoring">Refactoring</option>
+                    
+                    <option value="/docs/cpp/customize-cpp-settings">Settings Reference</option>
+                    
+                    <option value="/docs/cpp/configure-intellisense">Configure IntelliSense</option>
+                    
+                    <option value="/docs/cpp/configure-intellisense-crosscompilation">Configure IntelliSense for Cross-Compiling</option>
+                    
+                    <option value="/docs/cpp/faq-cpp">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="C#">
+            
+                    <option value="/docs/csharp/introvideos-csharp">Intro Videos</option>
+                    
+                    <option value="/docs/csharp/get-started">Get Started</option>
+                    
+                    <option value="/docs/csharp/navigate-edit">Navigate and Edit</option>
+                    
+                    <option value="/docs/csharp/intellicode">IntelliCode</option>
+                    
+                    <option value="/docs/csharp/refactoring">Refactoring</option>
+                    
+                    <option value="/docs/csharp/formatting-linting">Formatting and Linting</option>
+                    
+                    <option value="/docs/csharp/project-management">Project Management</option>
+                    
+                    <option value="/docs/csharp/build-tools">Build Tools</option>
+                    
+                    <option value="/docs/csharp/package-management">Package Management</option>
+                    
+                    <option value="/docs/csharp/debugging">Run and Debug</option>
+                    
+                    <option value="/docs/csharp/testing">Testing</option>
+                    
+                    <option value="/docs/csharp/cs-dev-kit-faq">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Container Tools">
+            
+                    <option value="/docs/containers/overview">Overview</option>
+                    
+                    <option value="/docs/containers/quickstart-node">Node.js</option>
+                    
+                    <option value="/docs/containers/quickstart-python">Python</option>
+                    
+                    <option value="/docs/containers/quickstart-aspnet-core">ASP.NET Core</option>
+                    
+                    <option value="/docs/containers/debug-common">Debug</option>
+                    
+                    <option value="/docs/containers/docker-compose">Docker Compose</option>
+                    
+                    <option value="/docs/containers/quickstart-container-registries">Registries</option>
+                    
+                    <option value="/docs/containers/app-service">Deploy to Azure</option>
+                    
+                    <option value="/docs/containers/choosing-dev-environment">Choose a Dev Environment</option>
+                    
+                    <option value="/docs/containers/reference">Customize</option>
+                    
+                    <option value="/docs/containers/bridge-to-kubernetes">Develop with Kubernetes</option>
+                    
+                    <option value="/docs/containers/troubleshooting">Tips and Tricks</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Data Science">
+            
+                    <option value="/docs/datascience/overview">Overview</option>
+                    
+                    <option value="/docs/datascience/jupyter-notebooks">Jupyter Notebooks</option>
+                    
+                    <option value="/docs/datascience/data-science-tutorial" selected="">Data Science Tutorial</option>
+                    
+                    <option value="/docs/datascience/python-interactive">Python Interactive</option>
+                    
+                    <option value="/docs/datascience/data-wrangler-quick-start">Data Wrangler Quick Start</option>
+                    
+                    <option value="/docs/datascience/data-wrangler">Data Wrangler</option>
+                    
+                    <option value="/docs/datascience/pytorch-support">PyTorch Support</option>
+                    
+                    <option value="/docs/datascience/azure-machine-learning">Azure Machine Learning</option>
+                    
+                    <option value="/docs/datascience/jupyter-kernel-management">Manage Jupyter Kernels</option>
+                    
+                    <option value="/docs/datascience/notebooks-web">Jupyter Notebooks on the Web</option>
+                    
+                    <option value="/docs/datascience/microsoft-fabric-quickstart">Data Science in Microsoft Fabric</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Intelligent Apps">
+            
+                    <option value="/docs/intelligentapps/overview">AI Toolkit Overview</option>
+                    
+                    <option value="/docs/intelligentapps/copilot-tools">AI Toolkit Copilot Tools</option>
+                    
+                    <option value="/docs/intelligentapps/models">Models</option>
+                    
+                    <option value="/docs/intelligentapps/playground">Playground</option>
+                    
+                    <option value="/docs/intelligentapps/agentbuilder">Agent Builder</option>
+                    
+                    <option value="/docs/intelligentapps/bulkrun">Bulk Run</option>
+                    
+                    <option value="/docs/intelligentapps/evaluation">Evaluation</option>
+                    
+                    <option value="/docs/intelligentapps/finetune">Fine-Tuning (Automated Setup)</option>
+                    
+                    <option value="/docs/intelligentapps/finetune-legacy">Fine-Tuning (Project Template)</option>
+                    
+                    <option value="/docs/intelligentapps/modelconversion">Model Conversion</option>
+                    
+                    <option value="/docs/intelligentapps/tracing">Tracing</option>
+                    
+                    <option value="/docs/intelligentapps/profiling">Profiling (Windows ML)</option>
+                    
+                    <option value="/docs/intelligentapps/faq">FAQ</option>
+                    
+                    </optgroup><optgroup label="Intelligent Apps - Reference">
+            
+                      <option value="/docs/intelligentapps/reference/FileStructure">File Structure</option>
+                      
+                      <option value="/docs/intelligentapps/reference/ManualModelConversion">Manual Model Conversion</option>
+                      
+                      <option value="/docs/intelligentapps/reference/ManualConversionOnGPU">Manual Model Conversion on GPU</option>
+                      
+                      <option value="/docs/intelligentapps/reference/SetupWithoutAITK">Setup Environment Without AI Toolkit</option>
+                      
+                      <option value="/docs/intelligentapps/reference/TemplateProject">Template Project</option>
+                      
+                    </optgroup>
+            
+              
+              
+              <optgroup label="Azure">
+            
+                    <option value="/docs/azure/overview">Overview</option>
+                    
+                    <option value="/docs/azure/gettingstarted">Getting Started</option>
+                    
+                    <option value="/docs/azure/resourcesextension">Resources View</option>
+                    
+                    <option value="/docs/azure/deployment">Deployment</option>
+                    
+                    <option value="/docs/azure/vscodeforweb">VS Code for the Web - Azure</option>
+                    
+                    <option value="/docs/azure/containers">Containers</option>
+                    
+                    <option value="/docs/azure/aksextensions">Azure Kubernetes Service</option>
+                    
+                    <option value="/docs/azure/kubernetes">Kubernetes</option>
+                    
+                    <option value="/docs/azure/mongodb">MongoDB</option>
+                    
+                    <option value="/docs/azure/remote-debugging">Remote Debugging for Node.js</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Remote">
+            
+                    <option value="/docs/remote/remote-overview">Overview</option>
+                    
+                    <option value="/docs/remote/ssh">SSH</option>
+                    
+                    <option value="/docs/remote/dev-containers">Dev Containers</option>
+                    
+                    <option value="/docs/remote/wsl">Windows Subsystem for Linux</option>
+                    
+                    <option value="/docs/remote/codespaces">GitHub Codespaces</option>
+                    
+                    <option value="/docs/remote/vscode-server">VS Code Server</option>
+                    
+                    <option value="/docs/remote/tunnels">Tunnels</option>
+                    
+                    <option value="/docs/remote/ssh-tutorial">SSH Tutorial</option>
+                    
+                    <option value="/docs/remote/wsl-tutorial">WSL Tutorial</option>
+                    
+                    <option value="/docs/remote/troubleshooting">Tips and Tricks</option>
+                    
+                    <option value="/docs/remote/faq">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Dev Containers">
+            
+                    <option value="/docs/devcontainers/containers">Overview</option>
+                    
+                    <option value="/docs/devcontainers/tutorial">Tutorial</option>
+                    
+                    <option value="/docs/devcontainers/attach-container">Attach to Container</option>
+                    
+                    <option value="/docs/devcontainers/create-dev-container">Create Dev Container</option>
+                    
+                    <option value="/docs/devcontainers/containers-advanced">Advanced Containers</option>
+                    
+                    <option value="/docs/devcontainers/devcontainerjson-reference">devcontainer.json</option>
+                    
+                    <option value="/docs/devcontainers/devcontainer-cli">Dev Container CLI</option>
+                    
+                    <option value="/docs/devcontainers/tips-and-tricks">Tips and Tricks</option>
+                    
+                    <option value="/docs/devcontainers/faq">FAQ</option>
+                    
+              </optgroup>
+              
+              <optgroup label="Reference">
+            
+                    <option value="/docs/reference/default-keybindings">Default Keyboard Shortcuts</option>
+                    
+                    <option value="/docs/reference/default-settings">Default Settings</option>
+                    
+                    <option value="/docs/reference/variables-reference">Substitution Variables</option>
+                    
+                    <option value="/docs/reference/tasks-appendix">Tasks Schema</option>
+                    
+              </optgroup>
+              
+              </select>
+            </nav>        </aside>
+        
+        <!-- Content wrapper contains main content + right sidebar -->
+        <div class="docs-content-wrapper">
+            <!-- Right sidebar - On This Page -->
+            <aside class="docs-right-sidebar hidden-xs">
+                <nav id="docs-subnavbar" aria-label="On Page">
+                    
+                    <h4><span class="sr-only">On this page there are 6 sections</span><span aria-hidden="true">On this page</span></h4>
+                    <ul class="nav">
+                        
+                        <li class=""><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_prerequisites">Prerequisites</a></li>
+                        
+                        <li class="active"><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_set-up-a-data-science-environment">Set up a data science environment</a></li>
+                        
+                        <li class=""><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_prepare-the-data">Prepare the data</a></li>
+                        
+                        <li class=""><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_train-and-evaluate-a-model">Train and evaluate a model</a></li>
+                        
+                        <li><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_optional-use-a-neural-network">(Optional) Use a neural network</a></li>
+                        
+                        <li><a href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_next-steps">Next steps</a></li>
+                        
+                    </ul>
+                    
+                </nav>
+                
+            </aside>
+            
+            <!-- Main article content -->
+            <main class="docs-main-content body">
+                <h1>Data Science in VS Code tutorial</h1>
+<p>This tutorial demonstrates using Visual Studio Code and the Microsoft Python extension with common data science libraries to explore a basic data science scenario. Specifically, using passenger data from the Titanic, you will learn how to set up a data science environment, import and clean data, create a machine learning model for predicting survival on the Titanic, and evaluate the accuracy of the generated model.</p>
+<h2 id="_prerequisites" data-needslink="_prerequisites"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_prerequisites">Prerequisites</a></h2>
+<p>The following installations are required for the completion of this tutorial. Make sure to install them if you haven't already.</p>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+</li>
+<li>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" class="external-link" target="_blank">Python extension for VS Code</a> and <a href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter" class="external-link" target="_blank">Jupyter extension for VS Code</a> from the Visual Studio Marketplace. For more details on installing extensions, see <a href="https://code.visualstudio.com/docs/configure/extensions/extension-marketplace">Extension Marketplace</a>. Both extensions are published by Microsoft.</p>
+</li>
+<li>
+<p><a href="https://docs.anaconda.com/miniconda/" class="external-link" target="_blank">Miniconda with latest Python</a></p>
+<blockquote><p><strong>Note</strong>: If you already have the full Anaconda distribution installed, you don't need to install Miniconda. Alternatively, if you'd prefer not to use Anaconda or Miniconda, you can create a Python virtual environment and install the packages needed for the tutorial using pip. If you go this route, you will need to install the following packages: pandas, jupyter, seaborn, scikit-learn, keras, and tensorflow.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Shell</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="sh" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Shell"><code><span class="line"><span style="--shiki-dark:#DCDCAA;--shiki-light:#795E26">python</span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF"> -m</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> pip</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> install</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> pandas</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> jupyter</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> seaborn</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> scikit-learn</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> keras</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515"> tensorflow</span></span>
+<span class="line"></span></code></pre></div>
+</blockquote></li>
+</ul>
+<h2 id="_set-up-a-data-science-environment" data-needslink="_set-up-a-data-science-environment"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_set-up-a-data-science-environment">Set up a data science environment</a></h2>
+<p>Visual Studio Code and the Python extension provide a great editor for data science scenarios. With native support for Jupyter notebooks combined with Anaconda, it's easy to get started. In this section, you will create a workspace for the tutorial, create an Anaconda environment with the data science modules needed for the tutorial, and create a Jupyter notebook that you'll use for creating a machine learning model.</p>
+<ol>
+<li>
+<p>Begin by creating an Anaconda environment for the data science tutorial. Open an Anaconda command prompt and run <code>conda create -n myenv python=3.10 pandas jupyter seaborn scikit-learn keras tensorflow</code> to create an environment named <strong>myenv</strong>. For additional information about creating and managing Anaconda environments, see the <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html" class="external-link" target="_blank">Anaconda documentation</a>.</p>
+</li>
+<li>
+<p>Next, create a folder in a convenient location to serve as your VS Code workspace for the tutorial, name it <code>hello_ds</code>.</p>
+</li>
+<li>
+<p>Open the project folder in VS Code by running VS Code and using the <strong>File</strong> &gt; <strong>Open Folder</strong> command. You can safely trust opening the folder, since you created it.</p>
+</li>
+<li>
+<p>Once VS Code launches, create the Jupyter notebook that will be used for the tutorial. Open the Command Palette (<span class="dynamic-keybinding keybinding win" data-commandid="workbench.action.showCommands" data-osx="⇧⌘P" data-win="Ctrl+Shift+P" data-linux="Ctrl+Shift+P" title="macOS: ⇧⌘P, Linux: Ctrl+Shift+P">Ctrl+Shift+P</span>) and select <strong>Create: New Jupyter Notebook</strong>.</p>
+<p><img src="./Data Science in VS Code tutorial_files/create-notebook.png" alt="Creating a new Jupyter Notebook" loading="lazy" class="expandable-image" tabindex="0" aria-label="Creating a new Jupyter Notebook. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+<blockquote><p><strong>Note</strong>: Alternatively, from the VS Code File Explorer, you can use the New File icon to create a Notebook file named <code>hello.ipynb</code>.</p>
+</blockquote></li>
+<li>
+<p>Save the file as <code>hello.ipynb</code> using <strong>File</strong> &gt; <strong>Save As...</strong>.</p>
+</li>
+<li>
+<p>After your file is created, you should see the open <a href="https://jupyter.org/" class="external-link" target="_blank">Jupyter notebook</a> in the notebook editor. For additional information about native Jupyter notebook support, you can read the <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">Jupyter Notebooks</a> topic.</p>
+<p><img src="./Data Science in VS Code tutorial_files/notebook-editor.png" alt="Viewing a new Jupyter Notebook" loading="lazy" class="expandable-image" tabindex="0" aria-label="Viewing a new Jupyter Notebook. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>Now select <strong>Select Kernel</strong> at the top right of the notebook.</p>
+<p><img src="./Data Science in VS Code tutorial_files/select-kernel.png" alt="Selecting a Jupyter Notebook Kernel" loading="lazy" class="expandable-image" tabindex="0" aria-label="Selecting a Jupyter Notebook Kernel. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>Choose the Python environment you created above in which to run your kernel.</p>
+<p><img src="./Data Science in VS Code tutorial_files/choose-myenv.png" alt="Choose a kernel from created environment" loading="lazy" class="expandable-image" tabindex="0" aria-label="Choose a kernel from created environment. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>To manage your environment from VS Code's integrated terminal, open it up with (<span class="dynamic-keybinding keybinding win" data-commandid="workbench.action.terminal.toggleTerminal" data-osx="⌃`" data-win="Ctrl+`" data-linux="Ctrl+`" title="macOS: ⌃`, Linux: Ctrl+`">Ctrl+`</span>). If your environment is not activated, you can do so as you would in your terminal (<code>conda activate myenv</code>).</p>
+</li>
+</ol>
+<h2 id="_prepare-the-data" data-needslink="_prepare-the-data"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_prepare-the-data">Prepare the data</a></h2>
+<p>This tutorial uses the <a href="https://hbiostat.org/data/repo/titanic.html" class="external-link" target="_blank">Titanic dataset</a> available on <a href="https://www.openml.org/d/40945" class="external-link" target="_blank">OpenML.org</a>, which is obtained from Vanderbilt University's Department of Biostatistics at <a href="https://hbiostat.org/data" class="external-link" target="_blank">https://hbiostat.org/data</a>. The Titanic data provides information about the survival of passengers on the Titanic and characteristics about the passengers such as age and ticket class. Using this data, the tutorial will establish a model for predicting whether a given passenger would have survived the sinking of the Titanic. This section shows how to load and manipulate data in your Jupyter notebook.</p>
+<ol>
+<li>
+<p>To begin, download the Titanic data from <a href="https://hbiostat.org/data/repo/titanic3.csv" class="external-link" target="_blank">hbiostat.org</a> as a CSV file (download links in the upper right) named <code>titanic3.csv</code> and save it to the <code>hello_ds</code> folder that you created in the previous section.</p>
+</li>
+<li>
+<p>If you haven't already opened the file in VS Code, open the <code>hello_ds</code> folder and the Jupyter notebook (<code>hello.ipynb</code>), by going to <strong>File</strong> &gt; <strong>Open Folder</strong>.</p>
+</li>
+<li>
+<p>Within your Jupyter notebook, begin by importing the <a href="https://pandas.pydata.org/" class="external-link" target="_blank">pandas</a> and <a href="https://numpy.org/" class="external-link" target="_blank">numpy</a> libraries, two common libraries used for manipulating data, and loading the Titanic data into a pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html" class="external-link" target="_blank">DataFrame</a>. To do so, copy the code below into the first cell of the notebook. For more guidance about working with Jupyter notebooks in VS Code, see the <a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks">Working with Jupyter Notebooks</a> documentation.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> pandas </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">as</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> pd</span></span>
+<span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> numpy </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">as</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> np</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data = pd.read_csv(</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'titanic3.csv'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>Now, run the cell using the Run cell icon or the <span class="keybinding">Shift+Enter</span> shortcut.</p>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-01.png" alt="Running a Jupyter notebook cell" loading="lazy" class="expandable-image" tabindex="0" aria-label="Running a Jupyter notebook cell. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>After the cell finishes running, you can view the data that was loaded using the Variables Explorer and Data Viewer. First select the <strong>Variables</strong> icon in the notebook's upper toolbar.</p>
+<p><img src="./Data Science in VS Code tutorial_files/variable-explorer-1.png" alt="Select Variables icon" loading="lazy" class="expandable-image" tabindex="0" aria-label="Select Variables icon. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>A <strong>JUPYTER: VARIABLES</strong> pane will open at the bottom of VS Code. It contains a list of the variables defined so far in your running kernel.</p>
+<p><img src="./Data Science in VS Code tutorial_files/variable-explorer-2.png" alt="Variables pane" loading="lazy" class="expandable-image" tabindex="0" aria-label="Variables pane. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>To view the data in the Pandas DataFrame previously loaded, select the Data Viewer icon to the left of the <code>data</code> variable.</p>
+<p><img src="./Data Science in VS Code tutorial_files/variable-explorer-3.png" alt="Select Data Viewer icon" loading="lazy" class="expandable-image" tabindex="0" aria-label="Select Data Viewer icon. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>Use the Data Viewer to view, sort, and filter the rows of data. After reviewing the data, it can then be helpful to graph some aspects of it to help visualize the relationships between the different variables.</p>
+<p><img src="./Data Science in VS Code tutorial_files/dataviewer.png" alt="Data viewer and variable explorer" loading="lazy" class="expandable-image" tabindex="0" aria-label="Data viewer and variable explorer. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+<p>Alternatively, you can use the data viewing experience offered by other extensions like <a href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.datawrangler" class="external-link" target="_blank">Data Wrangler</a>. The Data Wrangler extension offers a rich user interface to show insights about your data and helps you perform data profiling, quality checks, transformations, and more. Learn more about the <a href="https://code.visualstudio.com/docs/datascience/data-wrangler">Data Wrangler extension in our docs</a>.</p>
+</li>
+<li>
+<p>Before the data can be graphed, you need to make sure that there aren't any issues with it. If you look at the Titanic csv file, one thing you'll notice is that a question mark ("?") was used to identify cells where data wasn't available.</p>
+<p>While Pandas can read this value into a DataFrame, the result for a column like <strong>age</strong> is that its data type will be set to <strong>object</strong> instead of a numeric data type, which is problematic for graphing.</p>
+<p>This problem can be corrected by replacing the question mark with a missing value that pandas is able to understand. Add the following code to the next cell in your notebook to replace the question marks in the <strong>age</strong> and <strong>fare</strong> columns with the <a href="https://docs.scipy.org/doc/numpy/reference/constants.html?highlight=nan#numpy.nan" class="external-link" target="_blank">numpy NaN</a> value. Notice that we also need to update the column's data type after replacing the values.</p>
+<blockquote><p><strong>Tip</strong>: To add a new cell you can use the insert cell icon that's in the bottom left corner of an existing cell. Alternatively, you can also use the <span class="keybinding">Esc</span> to enter command mode, followed by the <span class="keybinding">B</span> key.</p>
+</blockquote><div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data.replace(</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'?'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, np.nan, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">inplace</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">= </span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF">True</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data = data.astype({</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"age"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">: np.float64, </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"fare"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">: np.float64})</span></span>
+<span class="line"></span></code></pre></div>
+<blockquote><p><strong>Note</strong>: If you ever need to see the data type that has been used for a column, you can use the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html#pandas.DataFrame.dtypes" class="external-link" target="_blank">DataFrame dtypes</a> attribute.</p>
+</blockquote></li>
+<li>
+<p>Now that the data is in good shape, you can use <a href="https://seaborn.pydata.org/" class="external-link" target="_blank">seaborn</a> and <a href="https://matplotlib.org/" class="external-link" target="_blank">matplotlib</a> to view how certain columns of the dataset relate to survivability. Add the following code to the next cell in your notebook and run it to see the generated plots.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> seaborn </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">as</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> sns</span></span>
+<span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> matplotlib.pyplot </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">as</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> plt</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">fig, axs = plt.subplots(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ncols</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">5</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">figsize</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=(</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">30</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">5</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">))</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sns.violinplot(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">x</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">y</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"age"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">hue</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sex"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">data</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=data, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ax</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=axs[</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">0</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sns.pointplot(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">x</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sibsp"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">y</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">hue</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sex"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">data</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=data, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ax</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=axs[</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">1</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sns.pointplot(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">x</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"parch"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">y</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">hue</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sex"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">data</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=data, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ax</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=axs[</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">2</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sns.pointplot(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">x</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"pclass"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">y</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">hue</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sex"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">data</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=data, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ax</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=axs[</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">3</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sns.violinplot(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">x</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">y</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"fare"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">hue</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"sex"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">data</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=data, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">ax</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=axs[</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">4</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-02.png" alt="Graphing the titanic data" loading="lazy" class="expandable-image" tabindex="0" aria-label="Graphing the titanic data. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+<blockquote><p><strong>Tip</strong>: To quickly copy your graph, you can hover over the upper right corner of your graph and click on the <strong>Copy to Clipboard</strong> button that appears. You can also better view details of your graph by clicking the <strong>Expand image</strong> button.</p>
+</blockquote><p><img src="./Data Science in VS Code tutorial_files/plot-viewer-buttons.png" alt="Plot Viewer Buttons" loading="lazy" class="expandable-image" tabindex="0" aria-label="Plot Viewer Buttons. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>These graphs are helpful in seeing some of the relationships between survival and the input variables of the data, but it's also possible to use <strong>pandas</strong> to calculate correlations. To do so, all the variables used need to be numeric for the correlation calculation and currently gender is stored as a string. To convert those string values to integers, add and run the following code.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data.replace({</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'male'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">: </span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">1</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'female'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">: </span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">0</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">}, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">inplace</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF">True</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>Now, you can analyze the correlation between all the input variables to identify the features that would be the best inputs to a machine learning model. The closer a value is to 1, the higher the correlation between the value and the result. Use the following code to correlate the relationship between all variables and survival.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data.corr(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">numeric_only</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF">True</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">).abs()[[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">]]</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-03.png" alt="Determining the correlation between input variables and survival" loading="lazy" class="expandable-image" tabindex="0" aria-label="Determining the correlation between input variables and survival. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>Looking at the correlation results, you'll notice that some variables like gender have a fairly high correlation to survival, while others like relatives (sibsp = siblings or spouse, parch = parents or children) seem to have little correlation.</p>
+<p>Let's hypothesize that <strong>sibsp</strong> and <strong>parch</strong> are related in how they affect survivability, and group them into a new column called "relatives" to see whether the combination of them has a higher correlation to survivability. To do this, you will check if for a given passenger, the number of <strong>sibsp</strong> and <strong>parch</strong> is greater than 0 and, if so, you can then say that they had a relative on board.</p>
+<p>Use the following code to create a new variable and column in the dataset called <code>relatives</code> and check the correlation again.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'relatives'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">] = data.apply (</span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF">lambda</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080"> row</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">: </span><span style="--shiki-dark:#4EC9B0;--shiki-light:#267F99">int</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">((row[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'sibsp'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">] + row[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'parch'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">]) &gt; </span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">0</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">), </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">axis</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">1</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data.corr(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">numeric_only</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#569CD6;--shiki-light:#0000FF">True</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">).abs()[[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"survived"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">]]</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-04.png" alt="Determining the correlation between having relatives and survival" loading="lazy" class="expandable-image" tabindex="0" aria-label="Determining the correlation between having relatives and survival. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+</li>
+<li>
+<p>You'll notice that in fact when looked at from the standpoint of whether a person had relatives, versus how many relatives, there is a higher correlation with survival. With this information in hand, you can now drop from the dataset the low value <strong>sibsp</strong> and <strong>parch</strong> columns, as well as any rows that had <strong>NaN</strong> values, to end up with a dataset that can be used for training a model.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">data = data[[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'sex'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'pclass'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'age'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'relatives'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'fare'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'survived'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">]].dropna()</span></span>
+<span class="line"></span></code></pre></div>
+<blockquote><p><strong>Note</strong>: Although age had a low direct correlation, it was kept because it seems reasonable that it might still have correlation in conjunction with other inputs.</p>
+</blockquote></li>
+</ol>
+<h2 id="_train-and-evaluate-a-model" data-needslink="_train-and-evaluate-a-model"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_train-and-evaluate-a-model">Train and evaluate a model</a></h2>
+<p>With the dataset ready, you can now begin creating a model. For this section, you'll use the <a href="https://scikit-learn.org/stable/" class="external-link" target="_blank">scikit-learn</a> library (as it offers some useful helper functions) to do pre-processing of the dataset, train a classification model to determine survivability on the Titanic, and then use that model with test data to determine its accuracy.</p>
+<ol>
+<li>
+<p>A common first step to training a model is to divide up the dataset into training and validation data. This allows you to use a portion of the data to train the model and a portion of the data to test the model. If you used all your data to train the model, you wouldn't have a way to estimate how well it would actually perform against data the model hasn't yet seen. A benefit of the scikit-learn library is that it provides a method specifically for splitting a dataset into training and test data.</p>
+<p>Add and run a cell with the following code to the notebook to split up the data.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> sklearn.model_selection </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> train_test_split</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">x_train, x_test, y_train, y_test = train_test_split(data[[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'sex'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'pclass'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'age'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'relatives'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">,</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'fare'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">]], data.survived, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">test_size</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">0.2</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">random_state</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">0</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>Next, you'll normalize the inputs such that all features are treated equally. For example, within the dataset the values for age range from ~0-100, while gender is only a 1 or 0. By normalizing all the variables, you can ensure that the ranges of values are all the same. Use the following code in a new code cell to scale the input values.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> sklearn.preprocessing </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> StandardScaler</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">sc = StandardScaler()</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">X_train = sc.fit_transform(x_train)</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">X_test = sc.transform(x_test)</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>There are many different machine learning algorithms that you could choose from to model the data. The scikit-learn library also provides support for many of <a href="https://scikit-learn.org/stable/user_guide.html" class="external-link" target="_blank">them</a> and a <a href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html" class="external-link" target="_blank">chart</a> to help select the one that's right for your scenario. For now, use the <a href="https://scikit-learn.org/stable/modules/naive_bayes.html" class="external-link" target="_blank">Naïve Bayes algorithm</a>, a common algorithm for classification problems. Add a cell with the following code to create and train the algorithm.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> sklearn.naive_bayes </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> GaussianNB</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model = GaussianNB()</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.fit(X_train, y_train)</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>With a trained model, you can now try it against the test data set that was held back from training. Add and run the following code to predict the outcome of the test data and calculate the accuracy of the model.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> sklearn </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> metrics</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">predict_test = model.predict(X_test)</span></span>
+<span class="line"><span style="--shiki-dark:#DCDCAA;--shiki-light:#795E26">print</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">(metrics.accuracy_score(y_test, predict_test))</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-05.png" alt="Running the trained model against test data" loading="lazy" class="expandable-image" tabindex="0" aria-label="Running the trained model against test data. Expandable image, press Enter or Space to view larger and press Escape to close."></p>
+<p>Looking at the result of the test data, you'll see that the trained algorithm had a ~75% success rate at estimating survival.</p>
+</li>
+</ol>
+<h2 id="_optional-use-a-neural-network" data-needslink="_optional-use-a-neural-network"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_optional-use-a-neural-network">(Optional) Use a neural network</a></h2>
+<p>A neural network is a model that uses weights and activation functions, modeling aspects of human neurons, to determine an outcome based on provided inputs. Unlike the machine learning algorithm you looked at previously, neural networks are a form of deep learning wherein you don't need to know an ideal algorithm for your problem set ahead of time. It can be used for many different scenarios and classification is one of them. For this section, you'll use the <a href="https://keras.io/" class="external-link" target="_blank">Keras</a> library with <a href="https://www.tensorflow.org/" class="external-link" target="_blank">TensorFlow</a> to construct the neural network, and explore how it handles the Titanic dataset.</p>
+<ol>
+<li>
+<p>The first step is to import the required libraries and to create the model. In this case, you'll use a <a href="https://keras.io/getting-started/sequential-model-guide/" class="external-link" target="_blank">Sequential</a> neural network, which is a layered neural network wherein there are multiple layers that feed into each other in sequence.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> keras.models </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> Sequential</span></span>
+<span class="line"><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">from</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> keras.layers </span><span style="--shiki-dark:#C586C0;--shiki-light:#AF00DB">import</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> Dense</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model = Sequential()</span></span>
+<span class="line"></span></code></pre></div>
+</li>
+<li>
+<p>After defining the model, the next step is to add the layers of the neural network. For now, let's keep things simple and just use three layers. Add the following code to create the layers of the neural network.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.add(Dense(</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">5</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">kernel_initializer</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'uniform'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">activation</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'relu'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">input_dim</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">5</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">))</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.add(Dense(</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">5</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">kernel_initializer</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'uniform'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">activation</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'relu'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">))</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.add(Dense(</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">1</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">kernel_initializer</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'uniform'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">activation</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000"> = </span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'sigmoid'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">))</span></span>
+<span class="line"></span></code></pre></div>
+<ul>
+<li>The first layer will be set to have a dimension of 5, since you have five inputs: sex, pclass, age, relatives, and fare.</li>
+<li>The last layer must output 1, since you want a 1-dimensional output indicating whether a passenger would survive.</li>
+<li>The middle layer was kept at 5 for simplicity, although that value could have been different.</li>
+</ul>
+<p>The rectified linear unit (relu) activation function is used as a good general activation function for the first two layers, while the sigmoid activation function is required for the final layer as the output you want (of whether a passenger survives or not) needs to be scaled in the range of 0-1 (the probability of a passenger surviving).</p>
+<p>You can also look at the summary of the model you built with this line of code:</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.summary()</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-06.png" alt="Viewing a summary of the sequential neural network" loading="lazy"></p>
+</li>
+<li>
+<p>Once the model is created, it needs to be compiled. As part of this, you need to define what type of optimizer will be used, how loss will be calculated, and what metric should be optimized for. Add the following code to build and train the model. You'll notice that after training, the accuracy is ~61%.</p>
+<blockquote><p><strong>Note</strong>: This step may take anywhere from a few seconds to a few minutes to run depending on your machine.</p>
+</blockquote><div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.compile(</span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">optimizer</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">"adam"</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">loss</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'binary_crossentropy'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">metrics</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=[</span><span style="--shiki-dark:#CE9178;--shiki-light:#A31515">'accuracy'</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">])</span></span>
+<span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">model.fit(X_train, y_train, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">batch_size</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">32</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">, </span><span style="--shiki-dark:#9CDCFE;--shiki-light:#001080">epochs</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">=</span><span style="--shiki-dark:#B5CEA8;--shiki-light:#098658">50</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">)</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-07.png" alt="Build and train the neural network" loading="lazy"></p>
+</li>
+<li>
+<p>Now that the model is built and trained, we can see how it works against the test data.</p>
+<div class="code-block-wrapper"><div class="code-block-header"><span class="code-block-language">Python</span><div class="code-block-buttons"><button class="code-block-copy-btn" title="Copy code to clipboard" aria-label="Copy code to clipboard" type="button" tabindex="0"><span class="codicon codicon-copy"></span></button></div></div><pre class="shiki" data-lang="python" shiki-themes="" dark-plus="" light-plus"="" style="--shiki-dark:#D4D4D4;--shiki-light:#000000;--shiki-dark-bg:#1E1E1E;--shiki-light-bg:#FFFFFF" tabindex="0" aria-label="Code block in Python"><code><span class="line"><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">y_pred = np.rint(model.predict(X_test).flatten())</span></span>
+<span class="line"><span style="--shiki-dark:#DCDCAA;--shiki-light:#795E26">print</span><span style="--shiki-dark:#D4D4D4;--shiki-light:#000000">(metrics.accuracy_score(y_test, y_pred))</span></span>
+<span class="line"></span></code></pre></div>
+<p><img src="./Data Science in VS Code tutorial_files/jupyter-cell-08.png" alt="Evaluate the neural network" loading="lazy"></p>
+<p>Similar to the training, you'll notice that you now have 79% accuracy in predicting survival of passengers. Using this simple neural network, the result is better than the 75% accuracy from the Naive Bayes Classifier tried previously.</p>
+</li>
+</ol>
+<h2 id="_next-steps" data-needslink="_next-steps"><a class="hash-link" href="https://code.visualstudio.com/docs/datascience/data-science-tutorial#_next-steps">Next steps</a></h2>
+<p>Now that you're familiar with the basics of performing machine learning within Visual Studio Code, here are some other Microsoft resources and tutorials to check out.</p>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/configure/profiles#_data-science-profile-template">Data Science profile template</a> - Create a new <a href="https://code.visualstudio.com/docs/configure/profiles">profile</a> with a curated set of extensions, settings, and snippets.</li>
+<li>Learn more about working with <a href="https://youtu.be/FSdIoJdSnig" class="external-link" target="_blank">Jupyter Notebooks in Visual Studio Code</a> (video).</li>
+<li><a href="https://learn.microsoft.com/azure/machine-learning/how-to-setup-vs-code" class="external-link" target="_blank">Get started with Azure Machine Learning for VS Code</a> to deploy and optimize your model using the power of Azure.</li>
+<li>Find more data to explore on <a href="https://azure.microsoft.com/services/open-datasets/" class="external-link" target="_blank">Azure Open Data Sets</a>.</li>
+</ul>
+
+                <div class="feedback" data-edit-url="https://vscode.dev/github/microsoft/vscode-docs/blob/main/docs/datascience/data-science-tutorial.md"><section class="feedback-section" aria-labelledby="feedback-heading"><h2 id="feedback-heading" class="sr-only">Help and support</h2><div class="feedback-container"><div class="feedback-left"><div class="widget"><form aria-label="Feedback"><div class="buttons"><h3 class="feedback-header">Was this documentation helpful?</h3><br><button value="1">Yes<span class="sr-only"> , this page was helpful</span></button><button value="0">No<span class="sr-only"> , this page was not helpful</span></button></div></form></div></div><div class="feedback-middle"><h3>Still need help?</h3><ul class="support-links"><li><a href="https://stackoverflow.com/questions/tagged/vscode" target="_blank" rel="noopener noreferrer"><img alt="" src="./Data Science in VS Code tutorial_files/stackoverflow.svg" aria-hidden="true">Ask the community</a></li><li><a href="https://go.microsoft.com/fwlink/?LinkID=533482" target="_blank" rel="noopener noreferrer"><img alt="" src="./Data Science in VS Code tutorial_files/github.svg" aria-hidden="true">Request features</a></li><li><a href="https://www.github.com/Microsoft/vscode/issues" target="_blank" rel="noopener noreferrer"><img alt="" src="./Data Science in VS Code tutorial_files/issue.svg" aria-hidden="true">Report issues</a></li></ul></div><div class="feedback-right"><h3>Help us improve</h3><p>All VS Code docs are open source. See something that's wrong or unclear? <a href="https://vscode.dev/github/microsoft/vscode-docs/blob/main/docs/datascience/data-science-tutorial.md" target="_blank" rel="noopener noreferrer">Submit a pull request</a>.</p></div></div></section></div>
+                
+                <div class="body-footer">1/9/2023</div>
+                
+            </main>
+        </div>
+        
+        <!-- Mobile connect widget -->
+        <div class="docs-mobile-widgets visible-xs">
+            <div class="connect-widget"><ul class="connect-links"><li><a href="https://code.visualstudio.com/feed.xml" target="_blank"><img alt="RSS" src="./Data Science in VS Code tutorial_files/rss.svg">RSS Feed</a></li><li><a href="https://stackoverflow.com/questions/tagged/vscode" target="_blank" rel="noopener noreferrer"><img alt="Stackoverflow" src="./Data Science in VS Code tutorial_files/stackoverflow.svg">Ask questions</a></li><li><a href="https://go.microsoft.com/fwlink/?LinkID=533687" target="_blank" rel="noopener noreferrer"><img alt="Twitter" src="./Data Science in VS Code tutorial_files/twitter.svg">Follow @code</a></li><li id="connect-uservoice"><a href="https://go.microsoft.com/fwlink/?LinkID=533482" target="_blank" rel="noopener noreferrer"><img alt="GitHub" src="./Data Science in VS Code tutorial_files/github.svg">Request features</a></li><li id="connect-github"><a href="https://www.github.com/Microsoft/vscode/issues" target="_blank" rel="noopener noreferrer"><img alt="Issues" src="./Data Science in VS Code tutorial_files/issue.svg">Report issues</a></li><li id="connect-youtube"><a href="https://www.youtube.com/channel/UCs5Y5_7XK8HLDX0SLNwkd3w" target="_blank" rel="noopener noreferrer"><img alt="YouTube" src="./Data Science in VS Code tutorial_files/youtube.svg">Watch videos</a></li></ul></div>
+        </div>
+    </div>
+</div>
+		</main>
+	</div>
+
+	<div id="search-popup-overlay" class="search-popup-overlay">
+		<div class="search-popup-container">
+			<form class="search-popup-form">
+				<div class="input-group">
+					<input type="text" name="q" class="search-box form-control" placeholder="Search the website" aria-label="Search text">
+					<span class="input-group-btn">
+						<button tabindex="0" class="btn" type="submit" aria-label="Search">
+							<img class="search-icon-dark" src="./Data Science in VS Code tutorial_files/search-dark.svg" alt="Search">
+							<img class="search-icon-light" src="./Data Science in VS Code tutorial_files/search.svg" alt="Search">
+						</button>
+					</span>
+				</div>
+			</form>
+			<div class="search-popup-results">
+				<ul class="search-popup-results-list">
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<footer role="contentinfo" class="container">
+		<div class="footer-container">
+			<div class="footer-row">
+				<div class="footer-social">
+					<ul class="links">
+						<li>
+							<a href="https://github.com/microsoft/vscode"><img src="./Data Science in VS Code tutorial_files/github-icon.svg" alt="VS Code on Github"></a>
+						</li>
+						<li>
+							<a href="https://go.microsoft.com/fwlink/?LinkID=533687"><img src="./Data Science in VS Code tutorial_files/x-icon.svg" class="x-icon" alt="Follow us on X"></a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/showcase/vs-code"><img src="./Data Science in VS Code tutorial_files/linkedin-icon.svg" alt="VS Code on LinkedIn"></a>
+						</li>
+						<li>
+							<a href="https://bsky.app/profile/vscode.dev"><img src="./Data Science in VS Code tutorial_files/bluesky-icon.svg" alt="VS Code on Bluesky"></a>
+						</li>
+						<li>
+							<a href="https://www.reddit.com/r/vscode/"><img src="./Data Science in VS Code tutorial_files/reddit-icon.svg" alt="Join the VS Code community on Reddit"></a>
+						</li>
+						<li>
+							<a href="https://www.vscodepodcast.com/"><img src="./Data Science in VS Code tutorial_files/podcast-icon.svg" alt="The VS Code Insiders Podcast"></a>
+						</li>
+						<li>
+							<a href="https://www.tiktok.com/@vscode"><img src="./Data Science in VS Code tutorial_files/tiktok-icon.svg" alt="VS Code on TikTok"></a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/@code"><img src="./Data Science in VS Code tutorial_files/youtube-icon.svg" alt="VS Code on YouTube"></a>
+						</li>
+						<script>
+							function manageConsent() {
+								if (siteConsent && siteConsent.isConsentRequired) {
+									siteConsent.manageConsent();
+								}
+							}
+						</script>
+					</ul>
+					<a id="footer-microsoft-link" class="microsoft-logo" href="https://www.microsoft.com/">
+						<img src="./Data Science in VS Code tutorial_files/microsoft.svg" alt="Microsoft homepage">
+					</a>
+				</div>
+			</div>
+			<div class="footer-row">
+				<ul class="links">
+					<li><a id="footer-support-link" href="https://support.serviceshub.microsoft.com/supportforbusiness/create?sapId=d66407ed-3967-b000-4cfb-2c318cad363d" target="_blank" rel="noopener" title="Get support for VS Code" aria-label="Get support for VS Code (opens in new tab)">Support</a></li>
+					<li><a id="footer-privacy-link" href="https://go.microsoft.com/fwlink/?LinkId=521839" target="_blank" rel="noopener" title="View the Microsoft privacy statement" aria-label="Microsoft privacy statement (opens in new tab)">Privacy</a></li>
+					<li style=""><a id="footer-cookie-link" style="cursor: pointer;" onclick="manageConsent()" target="_blank" rel="noopener">Manage Cookies</a></li>
+					<li><a id="footer-terms-link" href="https://www.microsoft.com/legal/terms-of-use" target="_blank" rel="noopener" title="View the Microsoft Terms of Use" aria-label="Microsoft Terms of Use (opens in new tab)">Terms of Use</a></li>
+					<li><a id="footer-license-link" href="https://code.visualstudio.com/License" target="_blank" rel="noopener" title="View the Visual Studio Code license" aria-label="Visual Studio Code license (opens in new tab)">License</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<script type="module">
+		document.addEventListener('DOMContentLoaded', () => {
+			const copilotDeepLinks = document.querySelectorAll('.copilot-deep-link');
+			if (copilotDeepLinks.length === 0) {
+				return;
+			}
+			if (window.innerWidth < 992) {
+				for (const link of copilotDeepLinks) {
+					link.href = 'https://aka.ms/vscode-activatecopilotfree';
+				}
+			}
+		});
+	</script>
+
+	<script src="./Data Science in VS Code tutorial_files/index.js.download"></script>
+
+	
+
+	<script type="application/ld+json">
+		{
+			"@context" : "http://schema.org",
+			"@type" : "SoftwareApplication",
+			"name" : "Visual Studio Code",
+			"softwareVersion": "1.109",
+			"offers": {
+				"@type": "Offer",
+				"price": "0",
+				"priceCurrency": "USD"
+			},
+			"applicationCategory": "DeveloperApplication",
+			"applicationSubCategory": "Text Editor",
+			"alternateName": "VS Code",
+			"datePublished": "2021-11-03",
+			"operatingSystem": "Mac, Linux, Windows",
+			"logo": "https://code.visualstudio.com/assets/apple-touch-icon.png",
+			"screenshot": "https://code.visualstudio.com/assets/images/product-screenshot.png",
+			"releaseNotes": "https://code.visualstudio.com/updates",
+			"downloadUrl": "https://code.visualstudio.com/download",
+			"license": "https://code.visualstudio.com/license",
+			"softwareRequirements": "https://code.visualstudio.com/docs/supporting/requirements",
+			"url" : "https://code.visualstudio.com",
+			"author": {
+				"@type": "Organization",
+				"name": "Microsoft"
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "Microsoft"
+			},
+			"maintainer": {
+				"@type": "Organization",
+				"name": "Microsoft"
+			},
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": "https://code.visualstudio.com/Search?q={search_term_string}",
+				"query-input": "required name=search_term_string"
+			},
+			"sameAs" : [
+				"https://en.wikipedia.org/wiki/Visual_Studio_Code",
+				"https://twitter.com/code",
+				"https://www.youtube.com/code",
+				"https://www.tiktok.com/@vscode",
+				"https://github.com/microsoft/vscode"
+			]
+		}
+	</script>
+
+
+</body></html>
